@@ -1,0 +1,14 @@
+# ========================================
+# CREATE .env FILE FOR ADMIN
+# ========================================
+#
+# INSTRUCTIONS:
+# 1. Create a new file named: .env
+# 2. Copy the line below (without the #)
+# 3. Save in nova_admin folder
+# 4. Restart admin: npm start
+#
+# ========================================
+
+REACT_APP_API_URL=http://localhost:5000/api
+

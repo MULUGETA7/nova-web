@@ -1,0 +1,84 @@
+/* Base styles for the navbar */
+.navbar {
+  width: 634px;
+  height: 51px;
+  background-color: black;
+  border-radius: 60px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3000;
+  overflow: hidden;
+}
+
+.navbar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 60px;
+  padding: 4px;
+  background: linear-gradient(180deg, #FF1CF7, #00F0FF);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  z-index: -1;
+}
+
+.navbar a {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  margin: 0 10px; /* Adds horizontal spacing between links */
+  cursor: pointer; /* Ensure the cursor changes to pointer */
+  transition: none; /* Remove transition for instant navigation */
+}
+
+/* Adjust spacing when Home link is not present */
+.navbar-links.no-home a {
+  margin: 0 15px; /* Increase spacing between links */
+}
+
+/* Responsive styles for mobile */
+@media (max-width: 768px) {
+  .navbar {
+    width: 90%; /* Reduce width for a smaller container */
+    height: auto; /* Allow height to adjust based on content */
+    flex-direction: column; /* Stack links vertically */
+    align-items: center;
+    padding: 10px; /* Slightly increase padding for better spacing */
+    border-radius: 36px; /* Rounded 36px corners for mobile */
+    top: 10px; /* Adjust top position for mobile */
+  }
+
+  .navbar::before {
+    border-radius: 36px; /* Match the navbar border radius for mobile */
+  }
+
+  .navbar-links {
+    display: flex;
+    flex-wrap: wrap; /* Allow links to wrap into multiple rows */
+    justify-content: center;
+    gap: 8px; /* Slightly increase gap for better spacing */
+  }
+
+  .navbar a {
+    font-size: 16px; /* Reduce font size for smaller links */
+    padding: 8px 12px; /* Adjust padding for better touch targets */
+    margin: 0; /* Remove margin to use gap instead */
+  }
+
+  /* Adjust spacing for mobile when Home link is not present */
+  .navbar-links.no-home a {
+    margin: 0; /* Consistent margin for all links */
+  }
+}

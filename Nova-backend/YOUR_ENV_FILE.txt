@@ -1,0 +1,29 @@
+# ========================================
+# YOUR READY-TO-USE .env FILE
+# ========================================
+#
+# INSTRUCTIONS:
+# 1. Copy everything from line 9 onwards (the lines without #)
+# 2. Open or create .env file in NOVALABS folder
+# 3. Paste this content (replacing everything)
+# 4. Save the file
+# 5. Run: npm start
+#
+# ========================================
+
+MONGO_URI=mongodb+srv://mulugeta7:Mongodb7%40ATEGULUM@cluster0.erc7m.mongodb.net/NovaLabs?retryWrites=true&w=majority&appName=Cluster0
+PORT=5000
+NODE_ENV=development
+JWT_SECRET=novalabs-secret-key-2025-change-this-in-production
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+FRONTEND_URL=http://localhost:3000
+ADMIN_URL=http://localhost:3001
+
+
+# ========================================
+# NOTE: Your password Mongodb7@ATEGULUM was URL encoded to Mongodb7%40ATEGULUM
+# This is correct! The @ symbol must be %40 in the connection string.
+# ========================================
+

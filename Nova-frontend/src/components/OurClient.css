@@ -1,0 +1,65 @@
+.spline-section {
+  width: 100%;
+  height: 600px;
+  margin: 2rem auto;
+  position: relative;
+  background: transparent;
+}
+
+.spline-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.spline-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+}
+
+.spline-wrapper > div {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Make sure Spline canvas is responsive */
+.spline-wrapper canvas {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+
+.gradient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, transparent 50%, rgba(0,0,0,0.2) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Loading state */
+.spline-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.spline-container.loading::before {
+  opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .spline-section {
+    height: 400px;
+  }
+}

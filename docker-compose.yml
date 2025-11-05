@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  # Backend API - Using port 5020 to avoid conflict with existing services
+  nova-backend:
+    build:
+      context: ./Nova-backend
+      dockerfile: Dockerfile
+    container_name: nova-labs-backend
+    ports:
+      - "5020:5000"  # External:Internal - Access via 196.190.251.203:5020
+    environment:
+      - MONGO_URI=${MONGO_URI}
+      - PORT=5000
+      - NODE_ENV=production
+      - JWT_SECRET=${JWT_SECRET}
+      - CLOUDINARY_CLOUD_NAME=${CLOUDINARY_CLOUD_NAME}
+      - CLOUDINARY_API_KEY=${CLOUDINARY_API_KEY}
+      - CLOUDINARY_API_SECRET=${CLOUDINARY_API_SECRET}
+      - FRONTEND_URL=${FRONTEND_URL:-http://196.190.251.203:3020}
+      - ADMIN_URL=${ADMIN_URL:-http://196.190.251.203:3021}
+      - ADMIN_EMAIL=${ADMIN_EMAIL:-muleab7@gmail.com}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-Admin1234!}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+    restart: unless-stopped
+    volumes:
+      - ./Nova-backend/uploads:/app/uploads
+    networks:
+      - nova-network
+
+  # Frontend - Using port 3020 to avoid conflict with matrixx-website (3000)
+  nova-frontend:
+    build:
+      context: ./Nova-frontend
+      dockerfile: Dockerfile
+    container_name: nova-labs-frontend
+    ports:
+      - "3020:3000"  # External:Internal - Access via 196.190.251.203:3020
+    environment:
+      - REACT_APP_API_URL=${REACT_APP_API_URL:-http://196.190.251.203:5020}
+    restart: unless-stopped
+    volumes:
+      # Mount build directory so uploaded builds are immediately served
+      - ./Nova-frontend/build:/app/build
+    depends_on:
+      - nova-backend
+    networks:
+      - nova-network
+
+  # Admin Panel - Using port 3021 to avoid conflict with mattrix-website-admin (3001)
+  nova-admin:
+    build:
+      context: ./Nova_admin
+      dockerfile: Dockerfile
+    container_name: nova-labs-admin
+    ports:
+      - "3021:3001"  # External:Internal - Access via 196.190.251.203:3021
+    environment:
+      - REACT_APP_API_URL=${REACT_APP_API_URL:-http://196.190.251.203:5020}
+    restart: unless-stopped
+    depends_on:
+      - nova-backend
+    networks:
+      - nova-network
+
+networks:
+  nova-network:
+    driver: bridge
+

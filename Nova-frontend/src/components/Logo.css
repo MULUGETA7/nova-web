@@ -1,0 +1,37 @@
+/* Logo Container */
+.logo-container {
+  display: flex;
+  justify-content: flex-start; /* Align logo to the left */
+  align-items: center; /* Center the logo vertically */
+  width: 40%; /* Take full width */
+  padding: 20px; /* Add padding for spacing */
+  background-color: transparent; /* Transparent background */
+  position: fixed; /* Fix the logo at the top */
+  top: 0; /* Position at the top of the page */
+  left: 0; /* Align to the left */
+  z-index: 1000; /* Ensure the logo is above other elements */
+}
+
+/* Logo Image */
+.logo-image {
+  max-width: 120px; /* Set a max width for the logo */
+  height: auto; /* Maintain aspect ratio */
+  transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transition */
+}
+
+/* Hover Effect */
+.logo-image:hover {
+  transform: scale(1.1); /* Slightly enlarge the logo on hover */
+  opacity: 0.9; /* Slightly reduce opacity on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .logo-container {
+    padding: 10px; /* Reduce padding for smaller screens */
+  }
+
+  .logo-image {
+    max-width: 120px; /* Adjust logo size for smaller screens */
+  }
+}

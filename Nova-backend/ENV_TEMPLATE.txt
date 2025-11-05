@@ -1,0 +1,22 @@
+# ========================================
+# COPY THIS CONTENT TO CREATE YOUR .env FILE
+# ========================================
+# 
+# Instructions:
+# 1. Create a new file named: .env
+# 2. Copy all content below
+# 3. Replace YOUR_USERNAME, YOUR_PASSWORD, etc. with actual values
+# 4. Save the file
+#
+# ========================================
+
+MONGO_URI=mongodb+srv://YOUR_USERNAME:YOUR_PASSWORD@YOUR_CLUSTER.mongodb.net/NovaLabs?retryWrites=true&w=majority&appName=NovaLabsCluster
+PORT=5000
+NODE_ENV=development
+JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+FRONTEND_URL=http://localhost:3000
+ADMIN_URL=http://localhost:3001
+

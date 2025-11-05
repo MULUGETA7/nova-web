@@ -1,0 +1,23 @@
+.circular {
+    position: absolute;
+    left: 50%;
+    top: 40%; /* Adjust positioning as needed */
+    transform: translateX(-50%); /* Center the circle */
+    width: 293px; /* Default width */
+    height: 293px; /* Default height */
+    z-index: 1; /* Ensure it's below other elements */
+  }
+  
+  @media (max-width: 768px) {
+    .circular {
+      width: 200px; /* Adjust width for tablets */
+      height: 200px; /* Adjust height for tablets */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .circular {
+      width: 100px; /* Further adjust width for mobile */
+      height: 100px; /* Further adjust height for mobile */
+    }
+  }

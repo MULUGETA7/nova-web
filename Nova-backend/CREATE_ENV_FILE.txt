@@ -1,0 +1,43 @@
+# ========================================
+# CREATE YOUR .env FILE - COPY ALL TEXT BELOW
+# ========================================
+#
+# INSTRUCTIONS:
+# 1. Create a new file named: .env (in the NOVALABS folder)
+# 2. Copy everything from line 12 onwards
+# 3. Replace <db_password> with your actual MongoDB password
+# 4. Save the file
+# 5. Run: npm start
+#
+# ========================================
+
+MONGO_URI=mongodb+srv://mulugeta7:<db_password>@cluster0.erc7m.mongodb.net/NovaLabs?retryWrites=true&w=majority&appName=Cluster0
+PORT=5000
+NODE_ENV=development
+JWT_SECRET=novalabs-secret-key-2025-change-this-in-production
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+FRONTEND_URL=http://localhost:3000
+ADMIN_URL=http://localhost:3001
+
+
+# ========================================
+# WHAT TO REPLACE:
+# ========================================
+# 
+# In line 12, replace <db_password> with your actual password
+# 
+# Example:
+# If your password is: MyPass123
+# Change from: mongodb+srv://mulugeta7:<db_password>@cluster0...
+# Change to:   mongodb+srv://mulugeta7:MyPass123@cluster0...
+#
+# ⚠️ IMPORTANT: 
+# - No spaces around the password
+# - If your password has special characters, you may need to URL encode them
+#   Special chars like @, #, $, % need to be encoded
+#   Use this tool: https://www.urlencoder.org/
+#
+# ========================================
+

@@ -1,0 +1,135 @@
+@keyframes wave-motion {
+  0%, 100% {
+    transform: translateY(0); /* No displacement */
+  }
+  25% {
+    transform: translateY(-3px); /* Moves up */
+  }
+  50% {
+    transform: translateY(0); /* Back to original position */
+  }
+  75% {
+    transform: translateY(3px); /* Moves down */
+  }
+}
+
+@keyframes stretch-release {
+  0% {
+    transform: scaleX(1); /* Original state (not stretched) */
+  }
+  25% {
+    transform: scaleX(1.5); /* Stretch horizontally */
+  }
+  50% {
+    transform: scaleX(1); /* Back to original width */
+  }
+  75% {
+    transform: scaleX(1.5); /* Stretch again for wave-like release */
+  }
+  100% {
+    transform: scaleX(1); /* Return to original width */
+  }
+}
+
+.svg-group {
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite; /* Infinite loop */
+  transform-origin: center; /* Keeps translation centered */
+  display: inline-block; /* Prevents the gap issue */
+}
+
+/* Stretch and release effect for all groups */
+.group-1 {
+  animation: stretch-release 2s linear infinite, wave-motion 4s linear infinite;
+}
+
+.group-2 {
+  animation: stretch-release 2s linear 1s infinite, wave-motion 4s linear 1s infinite;
+}
+
+.group-3 {
+  animation: stretch-release 2s linear 2s infinite, wave-motion 4s linear 2s infinite;
+}
+
+.group-4 {
+  animation: stretch-release 2s linear 3s infinite, wave-motion 4s linear 3s infinite;
+}
+
+.nova-looper-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.nova-looper-svg {
+  width: 70%;
+  min-height: 70vh;
+  height: auto;
+  transform: translate(-4vw, 10vh);  /* Added -5vw to move left */
+  transform-origin: center center;
+}
+
+/* Extra large screens */
+@media screen and (min-width: 1920px) {
+  .nova-looper-svg {
+    width: 90%;
+    min-height: 100vh;
+    transform: translate(-4vw, 10vh);
+  }
+}
+
+/* Large screens */
+@media screen and (max-width: 1919px) and (min-width: 1440px) {
+  .nova-looper-svg {
+    width: 75%;
+    min-height: 95vh;
+    transform: translate(-4vw, 10vh);
+  }
+}
+
+/* Medium screens */
+@media screen and (max-width: 1439px) and (min-width: 1024px) {
+  .nova-looper-svg {
+    width: 70%;
+    min-height: 90vh;
+    transform: translate(-4vw, 10vh);
+  }
+}
+
+/* Small screens - match text-svg scale(0.9) */
+@media screen and (max-width: 1023px) {
+  .nova-looper-svg {
+    width: 60%;
+    min-height: 80vh;
+    transform: translate(-4vw, 10vh);
+  }
+}
+
+/* Tablet - match text-svg scale(0.7) */
+@media screen and (max-width: 768px) {
+  .nova-looper-svg {
+    width: 70%;
+    min-height: 70vh;
+    transform: translate(-4vw, 10vh);
+  }
+}
+
+/* Mobile - match text-svg scale(0.5) */
+@media screen and (max-width: 480px) {
+  .nova-looper-svg {
+    width: 70%;
+    min-height: 70vh;
+    transform: translate(-4vw, 10vh);
+  }
+}
+
+.nova-looper {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.84;
+  pointer-events: none;
+}

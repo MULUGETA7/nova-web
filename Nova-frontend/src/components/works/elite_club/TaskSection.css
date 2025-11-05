@@ -1,0 +1,48 @@
+.marquee {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.track {
+  position: absolute;
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee 30s linear infinite;
+  display: flex;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 1rem;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Optional: Pause animation on hover */
+.track:hover {
+  animation-play-state: paused;
+}
+
+/* Ensure content is centered vertically */
+.marquee {
+  display: flex;
+  align-items: center;
+  height: 100px; /* Adjust based on your content height */
+}
+
+/* Make sure the track takes full width */
+.track {
+  min-width: 100%;
+}
+
+/* Ensure smooth animation */
+.track {
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
