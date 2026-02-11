@@ -11,14 +11,15 @@ $SSH_KEY = "mulu_webserver_key"
 # Step 1: Build Frontend Applications
 Write-Host "`n📦 Step 1: Building Frontend Applications..." -ForegroundColor Yellow
 
-Write-Host "Building Nova-frontend..." -ForegroundColor Cyan
-Set-Location Nova-frontend
+Write-Host "Building frontend..." -ForegroundColor Cyan
+Set-Location frontend
 npm install
 npm run build
 Set-Location ..
 
-Write-Host "Building Nova_admin..." -ForegroundColor Cyan
-Set-Location Nova_admin
+
+Write-Host "Building admin..." -ForegroundColor Cyan
+Set-Location admin
 npm install
 npm run build
 Set-Location ..
@@ -37,12 +38,12 @@ if (-Not (Test-Path $SSH_KEY)) {
 
 # Create directory structure on server
 Write-Host "Creating directories on server..." -ForegroundColor Cyan
-ssh -i $SSH_KEY "$SERVER_USER@$SERVER_IP" "mkdir -p $SERVER_PATH/Nova-backend $SERVER_PATH/Nova-frontend $SERVER_PATH/Nova_admin"
+ssh -i $SSH_KEY "$SERVER_USER@$SERVER_IP" "mkdir -p $SERVER_PATH/backend $SERVER_PATH/frontend $SERVER_PATH/admin"
 
 # Upload backend (excluding node_modules and uploads)
 Write-Host "Uploading backend..." -ForegroundColor Cyan
 # Using scp for Windows compatibility
-Get-ChildItem -Path "Nova-backend" -Exclude "node_modules","uploads",".env",".git" -Recurse | 
+Get-ChildItem -Path "backend" -Exclude "node_modules","uploads",".env",".git" -Recurse | 
     ForEach-Object {
         $relativePath = $_.FullName.Replace((Get-Location).Path + "\", "").Replace("\", "/")
         $targetPath = "$SERVER_PATH/$relativePath"
@@ -56,11 +57,11 @@ Get-ChildItem -Path "Nova-backend" -Exclude "node_modules","uploads",".env",".gi
 
 # Upload frontend build
 Write-Host "Uploading frontend build..." -ForegroundColor Cyan
-scp -i $SSH_KEY -r "Nova-frontend/build" "$SERVER_USER@$SERVER_IP`:$SERVER_PATH/Nova-frontend/"
+scp -i $SSH_KEY -r "frontend/build" "$SERVER_USER@$SERVER_IP`:$SERVER_PATH/frontend/"
 
 # Upload admin build
 Write-Host "Uploading admin build..." -ForegroundColor Cyan
-scp -i $SSH_KEY -r "Nova_admin/build" "$SERVER_USER@$SERVER_IP`:$SERVER_PATH/Nova_admin/"
+scp -i $SSH_KEY -r "admin/build" "$SERVER_USER@$SERVER_IP`:$SERVER_PATH/admin/"
 
 Write-Host "`n✅ Files uploaded!`n" -ForegroundColor Green
 

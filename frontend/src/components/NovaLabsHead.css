@@ -1,0 +1,132 @@
+.nova-labs-head {
+  margin-top: -350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 300px;
+  /* Ensures the container has enough width */
+}
+
+.nova-labs-head-title {
+  font-size: 7.5vw;
+  /* Use viewport width for responsiveness */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  letter-spacing: 1.6px;
+  margin-bottom: -16px;
+  /* Adjusts spacing for large screens */
+  white-space: nowrap;
+  /* Prevents text from wrapping to the next line */
+}
+
+.nova-labs-head-subtitle {
+  font-size: 5.5vw;
+  /* Use viewport width for responsiveness */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  letter-spacing: 1.6px;
+  color: #FFFFFF;
+  margin-top: -8px;
+  /* Adjusts spacing for large screens */
+  white-space: nowrap;
+  /* Ensures "Today" stays in one line */
+}
+
+.nova-labs-head-description {
+  font-size: 1.8vw;
+  /* Use viewport width for responsiveness */
+  font-family: 'Montserrat', sans-serif;
+  color: #FFFFFF;
+  line-height: 1.5;
+  letter-spacing: 0.72px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+
+  .nova-labs-head-title,
+  .nova-labs-head-subtitle {
+    font-size: 5vw;
+    /* Adjust for smaller screens */
+  }
+
+  .nova-labs-head-description {
+    font-size: 1.5vw;
+    /* Adjust for smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* Keep the Innovating Tomorrow Today text visible on mobile */
+  .nova-labs-head {
+    display: flex;
+    /* Keep it visible */
+    margin-top: -350px;
+    /* Adjusted negative margin */
+  }
+
+  .nova-labs-head-title {
+    font-size: 7.5vw;
+    /* Restore original size */
+    margin-bottom: -16px;
+    /* Restore original spacing */
+  }
+
+  .nova-labs-head-subtitle {
+    font-size: 5.5vw;
+    /* Restore original size */
+    margin-top: 8px;
+    /* Move "Today" down a bit */
+  }
+
+  .nova-labs-head-description {
+    font-size: 1.8vw;
+    /* Restore original size */
+    margin-top: 12px;
+    /* Move description down a bit */
+  }
+
+  /* Only hide the big NOVA LABS frame */
+  .frame-container {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+
+  /* Keep the Innovating Tomorrow Today text visible on mobile */
+  .nova-labs-head {
+    display: flex;
+    /* Keep it visible */
+    margin-top: -350px;
+    /* Adjusted negative margin */
+  }
+
+  .nova-labs-head-title {
+    font-size: 7.5vw;
+    /* Restore original size */
+    margin-bottom: -16px;
+    /* Restore original spacing */
+  }
+
+  .nova-labs-head-subtitle {
+    font-size: 5.5vw;
+    /* Restore original size */
+    margin-top: 8px;
+    /* Move "Today" down a bit */
+  }
+
+  .nova-labs-head-description {
+    font-size: 1.8vw;
+    /* Restore original size */
+    margin-top: 12px;
+    /* Move description down a bit */
+  }
+
+  /* Only hide the big NOVA LABS frame */
+  .frame-container {
+    display: none !important;
+  }
+}

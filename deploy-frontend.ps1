@@ -16,15 +16,15 @@ if (-Not (Test-Path $SSH_KEY)) {
     exit 1
 }
 
-# Check if Nova-frontend directory exists
-if (-Not (Test-Path "Nova-frontend")) {
-    Write-Host "❌ ERROR: Nova-frontend directory not found!" -ForegroundColor Red
+# Check if frontend directory exists
+if (-Not (Test-Path "frontend")) {
+    Write-Host "❌ ERROR: frontend directory not found!" -ForegroundColor Red
     exit 1
 }
 
 # Step 1: Build Frontend
-Write-Host "📦 Step 1: Building Nova-frontend..." -ForegroundColor Yellow
-Set-Location Nova-frontend
+Write-Host "📦 Step 1: Building frontend..." -ForegroundColor Yellow
+Set-Location frontend
 
 # Clean old build directory
 Write-Host "Cleaning old build directory..." -ForegroundColor Cyan
@@ -53,7 +53,7 @@ if ($LASTEXITCODE -ne 0) {
 Set-Location ..
 
 # Check if build directory exists
-if (-Not (Test-Path "Nova-frontend/build")) {
+if (-Not (Test-Path "frontend/build")) {
     Write-Host "❌ ERROR: Build directory not found! Build may have failed." -ForegroundColor Red
     exit 1
 }
@@ -70,15 +70,15 @@ if (Test-Path "docker-compose.yml") {
 }
 
 Write-Host "Clearing old build directory on server..." -ForegroundColor Cyan
-ssh -i $SSH_KEY "$SERVER_USER@$SERVER_IP" "rm -rf $SERVER_PATH/Nova-frontend/build"
+ssh -i $SSH_KEY "$SERVER_USER@$SERVER_IP" "rm -rf $SERVER_PATH/frontend/build"
 
 Write-Host "Creating directory on server..." -ForegroundColor Cyan
-ssh -i $SSH_KEY "$SERVER_USER@$SERVER_IP" "mkdir -p $SERVER_PATH/Nova-frontend/build"
+ssh -i $SSH_KEY "$SERVER_USER@$SERVER_IP" "mkdir -p $SERVER_PATH/frontend/build"
 
-# Step 3: Upload build
+# Upload build
 Write-Host "Uploading frontend build..." -ForegroundColor Cyan
 # Use robocopy or scp without wildcard - upload the entire build directory
-scp -i $SSH_KEY -r "Nova-frontend/build" "$SERVER_USER@$SERVER_IP`:$SERVER_PATH/Nova-frontend/"
+scp -i $SSH_KEY -r "frontend/build" "$SERVER_USER@$SERVER_IP`:$SERVER_PATH/frontend/"
 
 if ($LASTEXITCODE -ne 0) {
     Write-Host "❌ Upload failed!" -ForegroundColor Red

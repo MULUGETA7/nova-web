@@ -1,0 +1,45 @@
+.footer-container {
+  background: linear-gradient(to top, rgba(5, 5, 5, 1) 0%, rgba(5, 5, 5, 0.5) 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* Custom Scrollbar for the links if needed */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+/* Nova Glow Effect */
+.nova-glow {
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+}
+
+/* Mobile adjustments */
+@media (max-width: 1024px) {
+  .footer-container {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+/* Transitions */
+.footer-container a,
+.footer-container button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Gradient Text for specified links if needed */
+.nova-gradient-text {
+  background: linear-gradient(to right, #FF1CF7, #00F0FF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

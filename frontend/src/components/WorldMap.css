@@ -1,0 +1,150 @@
+.world-map {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  height: 50vh;
+  min-height: 350px;
+}
+
+@media (min-width: 640px) {
+  .world-map {
+    height: 60vh;
+    min-height: 400px;
+  }
+}
+
+@media (min-width: 768px) {
+  .world-map {
+    height: 80vh;
+  }
+}
+
+.scaler {
+  transform: scale(1);
+}
+
+.world-map-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+  position: relative;
+  padding: 0;
+}
+
+.left-spline-container,
+.right-spline-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 15%;
+  height: 80vh;
+  gap: 2rem;
+  position: absolute;
+  top: 0;
+  z-index: 3;
+}
+
+.left-spline-container {
+  left: 0;
+}
+
+.right-spline-container {
+  right: 0;
+}
+
+.left-spline-container canvas,
+.right-spline-container canvas {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  min-height: 300px;
+  object-fit: contain;
+  position: relative;
+  z-index: 3;
+}
+
+.spline {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 80vh;
+  max-width: none;
+  z-index: 1;
+}
+
+.spline-container canvas {
+  position: absolute;
+  top: 50%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.world-map-container {
+  position: relative;
+}
+
+/* Centered Overlay */
+.center-overlay {
+  position: absolute;
+  z-index: 10;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 800px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .center-overlay {
+    top: 50%;
+  }
+}
+
+.terminal-input-wrapper {
+  margin: 0 auto;
+}
+
+.nova-glow-cyan {
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+}
+
+.invert-calendar::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  main {
+    padding: 0 2rem;
+  }
+}

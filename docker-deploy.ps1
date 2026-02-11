@@ -53,53 +53,53 @@ Write-Host "📤 Step 2: Uploading files..." -ForegroundColor Yellow
 # Upload docker-compose.yml and Dockerfiles
 Write-Host "   Uploading Docker configuration..." -ForegroundColor Cyan
 scp -i $SSH_KEY docker-compose.yml "$SERVER_USER@$SERVER_IP`:$SERVER_PATH/" 2>&1 | Out-Null
-scp -i $SSH_KEY NOVALABS/Dockerfile "$SERVER_USER@$SERVER_IP`:$SERVER_PATH/NOVALABS/" 2>&1 | Out-Null
-scp -i $SSH_KEY nova-labs/Dockerfile "$SERVER_USER@$SERVER_IP`:$SERVER_PATH/nova-labs/" 2>&1 | Out-Null
-scp -i $SSH_KEY nova_admin/Dockerfile "$SERVER_USER@$SERVER_IP`:$SERVER_PATH/nova_admin/" 2>&1 | Out-Null
+scp -i $SSH_KEY backend/Dockerfile "$SERVER_USER@$SERVER_IP`:$SERVER_PATH/backend/" 2>&1 | Out-Null
+scp -i $SSH_KEY frontend/Dockerfile "$SERVER_USER@$SERVER_IP`:$SERVER_PATH/frontend/" 2>&1 | Out-Null
+scp -i $SSH_KEY admin/Dockerfile "$SERVER_USER@$SERVER_IP`:$SERVER_PATH/admin/" 2>&1 | Out-Null
 
 # Upload backend (excluding node_modules, uploads, .env)
 Write-Host "   Uploading backend..." -ForegroundColor Cyan
-Get-ChildItem -Path "NOVALABS" -Recurse | Where-Object {
+Get-ChildItem -Path "backend" -Recurse | Where-Object {
     $_.FullName -notmatch "node_modules" -and
     $_.FullName -notmatch "uploads" -and
     $_.FullName -notmatch "\.env" -and
     $_.FullName -notmatch "\.git"
 } | ForEach-Object {
-    $relativePath = $_.FullName.Replace((Get-Location).Path + "\NOVALABS\", "").Replace("\", "/")
+    $relativePath = $_.FullName.Replace((Get-Location).Path + "\backend\", "").Replace("\", "/")
     if (-Not $_.PSIsContainer) {
-        $targetDir = "$SERVER_PATH/NOVALABS/" + (Split-Path $relativePath -Parent)
+        $targetDir = "$SERVER_PATH/backend/" + (Split-Path $relativePath -Parent)
         ssh -i $SSH_KEY "$SERVER_USER@$SERVER_IP" "mkdir -p '$targetDir'" 2>&1 | Out-Null
-        scp -i $SSH_KEY $_.FullName "$SERVER_USER@$SERVER_IP`:$SERVER_PATH/NOVALABS/$relativePath" 2>&1 | Out-Null
+        scp -i $SSH_KEY $_.FullName "$SERVER_USER@$SERVER_IP`:$SERVER_PATH/backend/$relativePath" 2>&1 | Out-Null
     }
 }
 
 # Upload frontend source
 Write-Host "   Uploading frontend source..." -ForegroundColor Cyan
-Get-ChildItem -Path "nova-labs" -Recurse | Where-Object {
+Get-ChildItem -Path "frontend" -Recurse | Where-Object {
     $_.FullName -notmatch "node_modules" -and
     $_.FullName -notmatch "build" -and
     $_.FullName -notmatch "\.git"
 } | ForEach-Object {
-    $relativePath = $_.FullName.Replace((Get-Location).Path + "\nova-labs\", "").Replace("\", "/")
+    $relativePath = $_.FullName.Replace((Get-Location).Path + "\frontend\", "").Replace("\", "/")
     if (-Not $_.PSIsContainer) {
-        $targetDir = "$SERVER_PATH/nova-labs/" + (Split-Path $relativePath -Parent)
+        $targetDir = "$SERVER_PATH/frontend/" + (Split-Path $relativePath -Parent)
         ssh -i $SSH_KEY "$SERVER_USER@$SERVER_IP" "mkdir -p '$targetDir'" 2>&1 | Out-Null
-        scp -i $SSH_KEY $_.FullName "$SERVER_USER@$SERVER_IP`:$SERVER_PATH/nova-labs/$relativePath" 2>&1 | Out-Null
+        scp -i $SSH_KEY $_.FullName "$SERVER_USER@$SERVER_IP`:$SERVER_PATH/frontend/$relativePath" 2>&1 | Out-Null
     }
 }
 
 # Upload admin source
 Write-Host "   Uploading admin source..." -ForegroundColor Cyan
-Get-ChildItem -Path "nova_admin" -Recurse | Where-Object {
+Get-ChildItem -Path "admin" -Recurse | Where-Object {
     $_.FullName -notmatch "node_modules" -and
     $_.FullName -notmatch "build" -and
     $_.FullName -notmatch "\.git"
 } | ForEach-Object {
-    $relativePath = $_.FullName.Replace((Get-Location).Path + "\nova_admin\", "").Replace("\", "/")
+    $relativePath = $_.FullName.Replace((Get-Location).Path + "\admin\", "").Replace("\", "/")
     if (-Not $_.PSIsContainer) {
-        $targetDir = "$SERVER_PATH/nova_admin/" + (Split-Path $relativePath -Parent)
+        $targetDir = "$SERVER_PATH/admin/" + (Split-Path $relativePath -Parent)
         ssh -i $SSH_KEY "$SERVER_USER@$SERVER_IP" "mkdir -p '$targetDir'" 2>&1 | Out-Null
-        scp -i $SSH_KEY $_.FullName "$SERVER_USER@$SERVER_IP`:$SERVER_PATH/nova_admin/$relativePath" 2>&1 | Out-Null
+        scp -i $SSH_KEY $_.FullName "$SERVER_USER@$SERVER_IP`:$SERVER_PATH/admin/$relativePath" 2>&1 | Out-Null
     }
 }
 

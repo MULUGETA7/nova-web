@@ -4,7 +4,7 @@ services:
   # Backend API - Using port 5020 to avoid conflict with existing services
   nova-backend:
     build:
-      context: ./Nova-backend
+      context: ./backend
       dockerfile: Dockerfile
     container_name: nova-labs-backend
     ports:
@@ -24,14 +24,14 @@ services:
       - OPENAI_API_KEY=${OPENAI_API_KEY:-}
     restart: unless-stopped
     volumes:
-      - ./Nova-backend/uploads:/app/uploads
+      - ./backend/uploads:/app/uploads
     networks:
       - nova-network
 
   # Frontend - Using port 3020 to avoid conflict with matrixx-website (3000)
   nova-frontend:
     build:
-      context: ./Nova-frontend
+      context: ./frontend
       dockerfile: Dockerfile
     container_name: nova-labs-frontend
     ports:
@@ -41,7 +41,7 @@ services:
     restart: unless-stopped
     volumes:
       # Mount build directory so uploaded builds are immediately served
-      - ./Nova-frontend/build:/app/build
+      - ./frontend/build:/app/build
     depends_on:
       - nova-backend
     networks:
@@ -50,7 +50,7 @@ services:
   # Admin Panel - Using port 3021 to avoid conflict with mattrix-website-admin (3001)
   nova-admin:
     build:
-      context: ./Nova_admin
+      context: ./admin
       dockerfile: Dockerfile
     container_name: nova-labs-admin
     ports:
@@ -58,6 +58,7 @@ services:
     environment:
       - REACT_APP_API_URL=${REACT_APP_API_URL:-http://196.190.251.203:5020}
     restart: unless-stopped
+
     depends_on:
       - nova-backend
     networks:

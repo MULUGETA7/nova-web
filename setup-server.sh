@@ -14,9 +14,9 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 
 APP_DIR="/home/ubuntu/nova-finall"
-BACKEND_DIR="$APP_DIR/NOVALABS"
-FRONTEND_DIR="$APP_DIR/nova-labs"
-ADMIN_DIR="$APP_DIR/nova_admin"
+BACKEND_DIR="$APP_DIR/backend"
+FRONTEND_DIR="$APP_DIR/frontend"
+ADMIN_DIR="$APP_DIR/admin"
 
 # Step 1: Install Node.js if not installed
 if ! command -v node &> /dev/null; then
