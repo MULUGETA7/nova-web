@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import LogoWall from "./LogoWall";
+import { motion } from "framer-motion";
 import { getApiUrl } from '../utils/apiConfig';
 
 const fallbackLogos = [
@@ -43,19 +43,43 @@ function OurClient() {
   }, []);
 
   return (
-    <div className="App py-10">
-      <h1 style={{ textAlign: 'left', marginLeft: '64px' }} className="text-2xl font-black text-white italic uppercase tracking-tighter mb-8">
-        Our <span className="nova-gradient-text">Clients</span>
-      </h1>
+    <div className="bg-[#0f172a]/10 py-32 px-4 border-t border-white/5 overflow-hidden">
+      <div className="max-w-7xl mx-auto text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-16"
+        >
+          <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.5em] mb-6">
+            Used by creative professionals at
+          </p>
+          <h1 className="text-2xl md:text-4xl font-black text-white tracking-tighter uppercase">
+            Our Global Network
+          </h1>
+        </motion.div>
 
-      {!loading && (
-        <LogoWall
-          items={partnerLogos}
-          duration="40s"
-          pauseOnHover={true}
-          size="clamp(5rem, 1rem + 20vmin, 15rem)"
-        />
-      )}
+        {!loading && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-40"
+          >
+            {partnerLogos.map((logo, index) => (
+              <motion.img
+                key={index}
+                src={logo.imgUrl}
+                alt={logo.altText}
+                whileHover={{ scale: 1.1, filter: "brightness(1.5)", opacity: 1 }}
+                className="h-6 md:h-10 w-auto object-contain grayscale transition-all duration-300 cursor-pointer"
+              />
+            ))}
+          </motion.div>
+        )}
+      </div>
     </div>
   );
 }

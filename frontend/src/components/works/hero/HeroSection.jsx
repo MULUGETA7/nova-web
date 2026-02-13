@@ -26,14 +26,15 @@ const HeroSection = () => {
         <div className="flex flex-col items-center px-12 py-12 max-md:px-8 max-sm:px-5">
           <div className="flex flex-col items-center w-full max-w-[900px]">
             <StatusBadge />
-            <h1 className="w-full md:w-[80%] mb-12 text-7xl tracking-tighter text-center leading-[79px] max-md:text-5xl max-md:leading-[55px] max-sm:mb-16 max-sm:text-4xl max-sm:leading-10">
+            <h1 className="w-full mb-12 text-6xl md:text-8xl font-black tracking-tighter text-center leading-[0.9] text-white uppercase">
               Launch Your Groundbreaking Web3 & AI Product
             </h1>
             <div className="flex justify-center">
-              <button className="p-5 text-base tracking-tighter text-black bg-white rounded-[118px] relative overflow-hidden group hover:scale-105 transition-transform duration-200">
+              <button className="px-8 py-5 text-sm font-black uppercase tracking-[0.2em] text-black bg-white rounded-full relative overflow-hidden group hover:scale-[1.02] transition-all duration-300">
                 <span className="relative z-10">Discuss Your Project Vision</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-teal-400 to-green-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-teal-400 to-green-400 rounded-[118px] blur opacity-30 group-hover:opacity-75 transition-opacity duration-300 animate-pulse"></div>
+                <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                {/* Glow effect */}
+                <div className="absolute -inset-4 bg-white/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full" />
               </button>
             </div>
           </div>

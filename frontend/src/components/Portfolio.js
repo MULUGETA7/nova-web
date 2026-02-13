@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { getApiUrl } from '../utils/apiConfig';
-import { PlayCircleIcon } from "@heroicons/react/24/outline";
 
 const FlowCard = ({ project, index }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -36,8 +35,6 @@ const FlowCard = ({ project, index }) => {
 
           {/* Dark Overlay on Hover */}
           <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-          {/* Play Icon Removed */}
 
           {/* Border Ring */}
           <div className="absolute inset-0 rounded-xl md:rounded-2xl ring-1 ring-inset ring-white/10 group-hover:ring-white/20 transition-all duration-300" />
@@ -89,19 +86,23 @@ const Portfolio = () => {
       try {
         const apiUrl = getApiUrl();
         const response = await fetch(`${apiUrl}/api/portfolio`);
-        if (!response.ok) throw new Error('Failed to fetch portfolio');
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
+        console.log("Portfolio Fetch Success:", data);
 
-        const processedData = data.map(item => ({
-          ...item,
-          imageUrl: `${apiUrl}${item.images[0]}`,
-          description: item.description || ""
-        }));
+        const processedData = data.map((item, idx) => {
+          console.log(`Processing Portfolio Item ${idx}:`, item);
+          return {
+            ...item,
+            imageUrl: `${apiUrl}${item.images[0]}`,
+            description: item.description || ""
+          };
+        });
 
         setProjects(processedData);
       } catch (error) {
-        console.error("Error fetching portfolio:", error);
-        // Fallback data - 9 items for 3x3 grid
+        console.error("DEBUG: Portfolio Fetch Error:", error);
+        // Fallback data
         const fallbackProjects = [
           { _id: '1', title: 'ZOO BREAK', imageUrl: 'https://picsum.photos/seed/zoo1/800/600', url: '#' },
           { _id: '2', title: 'MICROVERSE', imageUrl: 'https://picsum.photos/seed/micro2/800/600', url: '#' },
@@ -116,46 +117,32 @@ const Portfolio = () => {
         setProjects(fallbackProjects);
       }
     };
-    fetchProjects();
+    fetchProjects().catch(err => console.error("Unhandled fetchProjects error:", err));
   }, []);
 
-  // Split projects into 3 columns
   const column1 = projects.filter((_, i) => i % 3 === 0);
   const column2 = projects.filter((_, i) => i % 3 === 1);
   const column3 = projects.filter((_, i) => i % 3 === 2);
 
   return (
-    <section className="relative h-screen bg-black overflow-hidden">
-
-      {/* Subtle Background Glow */}
+    <section className="relative h-screen bg-black overflow-hidden py-24">
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500 rounded-full blur-3xl" />
       </div>
 
-      {/* Content Container */}
       <div className="relative z-10 w-full px-8 md:px-12 lg:px-16 h-full flex flex-col">
-
         {/* Header Removed */}
 
-        {/* 3 Column Auto-Scrolling Grid */}
         <div className="flex-1 overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 lg:gap-5 h-full">
-            {/* Left Column - Scrolls UP */}
             <ScrollingColumn projects={column1} direction="up" speed={50} />
-
-            {/* Middle Column - Scrolls DOWN */}
             <ScrollingColumn projects={column2} direction="down" speed={50} />
-
-            {/* Right Column - Scrolls UP */}
             <ScrollingColumn projects={column3} direction="up" speed={50} />
           </div>
         </div>
-
-        {/* Bottom CTA Removed */}
       </div>
 
-      {/* Smooth Black Fade Gradients - Focusing on Middle Row */}
       <div className="absolute top-0 left-0 right-0 h-[35vh] bg-gradient-to-b from-black via-black/80 to-transparent pointer-events-none z-20" />
       <div className="absolute bottom-0 left-0 right-0 h-[35vh] bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none z-20" />
     </section>

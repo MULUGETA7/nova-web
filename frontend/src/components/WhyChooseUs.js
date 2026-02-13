@@ -6,16 +6,17 @@ import FirstWhyChoose from '../assets/card images/first_why_choose.png';
 import ThirdWhyChoose from '../assets/card images/3rd_why_choose.png';
 import GradientText from './GradientText';
 import { Icon } from '@iconify/react';
+import TerminalChat from './TerminalChat';
 const WhyChooseUs = () => {
- 
+
   return (
     <section className="relative bg-black min-h-screen overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 opacity-20">
-        <img 
-          src={VectorImage} 
-          alt="Nova Labs Background" 
-          className="w-full h-full object-cover" 
+        <img
+          src={VectorImage}
+          alt="Nova Labs Background"
+          className="w-full h-full object-cover"
         />
       </div>
 
@@ -26,9 +27,9 @@ const WhyChooseUs = () => {
           {/* Header */}
           <div className="flex items-center gap-2 mb-6">
             <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
-              <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             <span className="text-sm font-medium uppercase tracking-wider">WHY CHOOSE US</span>
           </div>
@@ -42,18 +43,18 @@ const WhyChooseUs = () => {
           </div>
 
           {/* Vision Section */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             className="mb-6"
           >
-            <GradientText 
-              colors={["#FF1CF7", "#00F0FF"]} 
+            <GradientText
+              colors={["#FF1CF7", "#00F0FF"]}
               className="mb-4 text-3xl font-extrabold text-center"
             >
               Your Vision, Our Priority
             </GradientText>
-         
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -78,20 +79,20 @@ const WhyChooseUs = () => {
   rounded-3xl border border-white/20 
   shadow-xl backdrop-blur-sm 
   transform transition-transform hover:scale-105">
-  <div className="absolute inset-0 rounded-3xl">
-    <img
-      src={FirstWhyChoose}
-      alt="Innovative Solutions"
-      className="absolute inset-0 w-full h-full object-cover rounded-3xl" // Added rounded-3xl here
-    />
-                 
+                <div className="absolute inset-0 rounded-3xl">
+                  <img
+                    src={FirstWhyChoose}
+                    alt="Innovative Solutions"
+                    className="absolute inset-0 w-full h-full object-cover rounded-3xl" // Added rounded-3xl here
+                  />
+
                   <div className="relative z-10 flex flex-col justify-end p-4 md:p-5 h-full text-white">
                     <h3 className="text-xl md:text-2xl font-bold mb-2 text-white drop-shadow-lg">Innovative Solutions</h3>
                     <p className="text-sm md:text-base text-white font-bold bg-white/5 backdrop-blur-lg p-4 rounded-2xl border border-white/10 shadow-xl">Transforming challenges into breakthrough technologies with real-world impact.</p>
                   </div>
                 </div>
               </div>
-              
+
               {/* Mobile Rectangle Placeholder */}
               <div className="md:hidden w-full aspect-video bg-gradient-to-br from-white/10 to-white/5 rounded-3xl border border-white/20 shadow-xl backdrop-blur-sm mb-6">
                 <div className="relative overflow-hidden rounded-3xl h-full">
@@ -118,20 +119,20 @@ const WhyChooseUs = () => {
                 rounded-3xl border border-white/20 
                 shadow-2xl backdrop-blur-sm 
                 transform transition-transform hover:scale-105 hover:rotate-2">
-  <div className="absolute inset-0 rounded-3xl">
-    <img
-      src={ThirdWhyChoose}
-      alt="Global Expertise"
-      className="absolute inset-0 w-full h-full object-cover rounded-3xl" // Added rounded-3xl here
-    />
-                
+                <div className="absolute inset-0 rounded-3xl">
+                  <img
+                    src={ThirdWhyChoose}
+                    alt="Global Expertise"
+                    className="absolute inset-0 w-full h-full object-cover rounded-3xl" // Added rounded-3xl here
+                  />
+
                   <div className="relative z-10 flex flex-col justify-end p-4 md:p-5 h-full text-white">
                     <h3 className="text-xl md:text-2xl font-bold mb-2 text-white drop-shadow-lg">Global Expertise</h3>
                     <p className="text-sm font-bold md:text-base text-white bg-white/5 backdrop-blur-lg p-4 rounded-2xl border border-white/10 shadow-xl">Leveraging top talent to deliver cutting-edge solutions across industries.</p>
                   </div>
                 </div>
               </div>
-              
+
               {/* Mobile Second Rectangle Placeholder */}
               <div className="md:hidden w-full aspect-video bg-gradient-to-tr from-white/10 to-white/5 rounded-3xl border border-white/20 shadow-2xl backdrop-blur-sm mt-6">
                 <div className="relative overflow-hidden rounded-3xl h-full">
@@ -166,26 +167,26 @@ const WhyChooseUs = () => {
             {/* Header - Hidden on mobile, shown on desktop */}
             <div className="hidden md:flex items-center gap-2 mb-4">
               <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
-                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               <span className="text-sm font-medium uppercase tracking-wider">WHY CHOOSE US</span>
             </div>
 
             {/* Vision Section - Hidden on mobile, shown on desktop */}
-           <motion.div 
-             initial={{ opacity: 0, y: 30 }}
-             animate={{ opacity: 1, y: 0 }}
-             className="py-0 hidden md:block" // Hidden on mobile
-           >
-             <GradientText 
-               colors={["#FF1CF7", "#00F0FF"]} 
-               className="mr-16 mb-4 text-4xl md:text-5xl font-extrabold py-2"
-             >
-               Your Vision, Our Priority
-             </GradientText>
-          
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="py-0 hidden md:block" // Hidden on mobile
+            >
+              <GradientText
+                colors={["#FF1CF7", "#00F0FF"]}
+                className="mr-16 mb-4 text-4xl md:text-5xl font-extrabold py-2"
+              >
+                Your Vision, Our Priority
+              </GradientText>
+
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -195,7 +196,7 @@ const WhyChooseUs = () => {
               </motion.p>
             </motion.div>
 
-           
+
 
             {/* White Boxes */}
             <div className="flex flex-col md:flex-row gap-4 md:gap-6">
@@ -233,31 +234,72 @@ const WhyChooseUs = () => {
               </motion.div>
             </div>
 
-            {/* Contact Section */}
-            <div className="mt-12 flex flex-col md:flex-row items-center gap-4">
-        <button className="px-6 py-3 bg-blue-600 text-white rounded-full flex items-center gap-2 hover:bg-blue-700 transition-colors">
-          Read More
-          <motion.svg
-            className="w-5 h-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            whileHover={{ x: 10 }} // Move right on hover
-            transition={{ duration: 0.5 }} // Animation duration
-          >
-            <path d="M5 12H19M19 12L16 6M19 12L16 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </motion.svg>
-        </button>
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-purple-500/10 rounded-xl flex items-center justify-center">
-                  <Icon icon="mingcute:phone-line" className="text-purple-500 w-10 h-10" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-400">Need help?</p>
-                  <p className="text-lg font-semibold">+2517800800 / +25177742999</p>
-                </div>
+            {/* Contact Section - Polished */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="mt-12 w-full"
+            >
+              {/* CTA Row */}
+              <div className="flex flex-col sm:flex-row items-center gap-4 mb-8">
+                <button className="px-8 py-3 bg-gradient-to-r from-[#ff1cf7] to-[#00f0ff] text-black font-bold rounded-full flex items-center gap-2 hover:opacity-90 transition-all duration-300 hover:scale-105 shadow-lg shadow-purple-500/20">
+                  Read More
+                  <motion.svg
+                    className="w-5 h-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    whileHover={{ x: 10 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <path d="M5 12H19M19 12L16 6M19 12L16 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </motion.svg>
+                </button>
               </div>
-            </div>
+
+              {/* Contact Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                {/* Phone Card */}
+                <a href="tel:+2517800800" className="group flex items-center gap-3 bg-white/5 backdrop-blur-lg rounded-2xl p-4 border border-white/10 hover:border-purple-500/30 hover:bg-white/10 transition-all duration-300">
+                  <div className="p-3 bg-purple-500/10 rounded-xl group-hover:bg-purple-500/20 transition-colors">
+                    <Icon icon="mingcute:phone-line" className="text-purple-400 w-6 h-6" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase tracking-wider">Call Us</p>
+                    <p className="text-sm font-semibold text-white">+251 780 0800</p>
+                  </div>
+                </a>
+
+                {/* Email Card */}
+                <a href="mailto:info@novalabs.et" className="group flex items-center gap-3 bg-white/5 backdrop-blur-lg rounded-2xl p-4 border border-white/10 hover:border-cyan-500/30 hover:bg-white/10 transition-all duration-300">
+                  <div className="p-3 bg-cyan-500/10 rounded-xl group-hover:bg-cyan-500/20 transition-colors">
+                    <Icon icon="mingcute:mail-line" className="text-cyan-400 w-6 h-6" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase tracking-wider">Email Us</p>
+                    <p className="text-sm font-semibold text-white">info@novalabs.et</p>
+                  </div>
+                </a>
+              </div>
+
+              {/* Terminal Chat Widget */}
+              <TerminalChat />
+
+              {/* Secondary Phone */}
+              <p className="text-xs text-white mt-3 text-center sm:text-left">Also available at: +251 777 42999</p>
+            </motion.div>
+
+
           </div>
+        </div>
+
+        {/* Collaborations Section - Centered Bottom */}
+        <div className="mt-20 pt-10 border-t border-white/10 text-center mx-auto max-w-4xl">
+          <h3 className="text-3xl md:text-5xl font-bold text-white mb-6">Our Collaborations</h3>
+          <p className="text-base md:text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            Partnering with visionaries to redefine boundaries and creating impactful digital experiences.
+          </p>
         </div>
       </div>
     </section>

@@ -23,7 +23,7 @@ const AnnouncementManager = () => {
     const [success, setSuccess] = useState('');
 
     useEffect(() => {
-        fetchAnnouncement();
+        fetchAnnouncement().catch(err => console.error("Unhandled fetchAnnouncement error:", err));
     }, []);
 
     const fetchAnnouncement = async () => {

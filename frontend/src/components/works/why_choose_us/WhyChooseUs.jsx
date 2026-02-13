@@ -10,10 +10,7 @@ function WhyChooseUs() {
       <div className="flex flex-col gap-8 items-center px-8 py-12 w-full max-w-[1100px]">
         <SectionHeader
           title="Why choose us?"
-          subtitle={[
-            "Check out what Nova Labs offers Vs employees and",
-            "other agencies. It's quite a lot!",
-          ]}
+          subtitle="Check out what Nova Labs offers Vs employees and other agencies. It's quite a lot!"
         />
 
         <SauceText />

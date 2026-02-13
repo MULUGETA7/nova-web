@@ -8,7 +8,7 @@ import AnnouncementBar from './components/AnnouncementBar';
 
 // Lazy load heavy components for better performance
 const Portfolio = lazy(() => import('./components/Portfolio'));
-const OurPartners = lazy(() => import('./components/OurPartners'));
+const InnovationShowcase = lazy(() => import('./components/InnovationShowcase'));
 const OurClient = lazy(() => import('./components/OurClient'));
 const HackatonShow = lazy(() => import('./components/HackatonShow'));
 const TechStack = lazy(() => import('./components/TechStack'));
@@ -51,13 +51,14 @@ const App = () => {
                   <NovaLabsIntro />
                   <WhyChooseUs />
 
-                  {/* Lazy loaded components - Load on demand */}
+                  {/* Portfolio Grid */}
                   <Suspense fallback={<LoadingFallback />}>
                     <Portfolio />
                   </Suspense>
 
+                  {/* Innovation Showcase Section */}
                   <Suspense fallback={<LoadingFallback />}>
-                    <OurPartners />
+                    <InnovationShowcase />
                   </Suspense>
 
                   <Suspense fallback={<LoadingFallback />}>

@@ -6,6 +6,7 @@ import StatsSection from '../components/about/stat/StatsSection';
 import ClientLogosSection from '../components/about/works/ClientLogosSection';
 
 import AnimateOnScroll from '../components/animations/AnimateOnScroll';
+import FAQSection from '../components/works/faqs/FAQSection';
 import FooterLinks from '../components/FooterLinks';
 
 const AboutUs = () => {
@@ -24,6 +25,10 @@ const AboutUs = () => {
 
       <AnimateOnScroll animation="fadeIn">
         <ClientLogosSection />
+      </AnimateOnScroll>
+
+      <AnimateOnScroll animation="slideUp">
+        <FAQSection showContact={false} />
       </AnimateOnScroll>
 
       {/* <AnimateOnScroll animation="slideUp" delay={0.3}>

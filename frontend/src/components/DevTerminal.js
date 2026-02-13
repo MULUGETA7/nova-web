@@ -27,7 +27,55 @@ const DevTerminal = ({ isOpen, onClose }) => {
         }
     ]);
     const [loading, setLoading] = useState(false);
+    const [lastReplyTime, setLastReplyTime] = useState(null);
     const scrollRef = useRef(null);
+    const pollingRef = useRef(null);
+
+    const fetchReplies = async () => {
+        try {
+            const apiUrl = getApiUrl();
+            // Use the terminal placeholder email to check for replies
+            const response = await fetch(`${apiUrl}/api/messages/replies/terminal@novalabs.et`);
+            if (response.ok) {
+                const data = await response.json();
+                const newReplies = data.filter(r => !lastReplyTime || new Date(r.repliedAt) > new Date(lastReplyTime));
+
+                if (newReplies.length > 0) {
+                    const replyItems = newReplies.reverse().map(reply => ({
+                        id: `reply-${Date.now()}-${Math.random()}`,
+                        type: 'agent-status',
+                        userCommand: 'Incoming Transmission from Admin',
+                        thoughts: [
+                            { text: 'Decrypting priority signal...', duration: '0.4s' },
+                            { text: 'Source verified: Nova Admin HQ', duration: '0.2s' }
+                        ],
+                        question: {
+                            title: `RE: ${reply.subject}`,
+                            text: reply.reply,
+                            options: ['Acknowledge transmission', 'Clear console']
+                        }
+                    }));
+
+                    setHistory(prev => [...prev, ...replyItems]);
+                    setLastReplyTime(newReplies[0].repliedAt);
+                }
+            }
+        } catch (err) {
+            console.error('Terminal polling error:', err);
+        }
+    };
+
+    useEffect(() => {
+        if (isOpen) {
+            fetchReplies();
+            pollingRef.current = setInterval(fetchReplies, 7000);
+        } else {
+            if (pollingRef.current) clearInterval(pollingRef.current);
+        }
+        return () => {
+            if (pollingRef.current) clearInterval(pollingRef.current);
+        };
+    }, [isOpen, lastReplyTime]);
 
     useEffect(() => {
         if (scrollRef.current) {
@@ -105,11 +153,33 @@ const DevTerminal = ({ isOpen, onClose }) => {
                         } : item
                     ));
                 } else {
+                    // Send the query to backend as a dev_terminal message
+                    try {
+                        const apiUrl = getApiUrl();
+                        await fetch(`${apiUrl}/api/messages`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                name: 'Dev Terminal User',
+                                email: 'terminal@novalabs.et',
+                                subject: 'Dev Terminal Inquiry',
+                                content: query,
+                                source: 'dev_terminal',
+                            }),
+                        });
+                    } catch (err) {
+                        // Silently fail - don't block the UI
+                    }
+
                     setHistory(prev => prev.map(item =>
                         item.id === newItem.id ? {
                             ...item,
-                            thoughts: [...thoughts, { text: 'Intent unrecognized.', duration: '0.1s' }],
-                            content: `Directives for "${query}" are not loaded in the current kernel.`
+                            thoughts: [...thoughts, { text: 'Routing to Nova support team...', duration: '0.3s' }],
+                            question: {
+                                title: 'Message Received',
+                                text: `Your inquiry "${query}" has been forwarded to the Nova Labs team. We'll get back to you soon.`,
+                                options: ['Send another message', 'List builds', 'Check status']
+                            }
                         } : item
                     ));
                 }

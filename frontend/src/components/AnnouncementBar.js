@@ -29,7 +29,7 @@ const AnnouncementBar = () => {
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: 'auto', opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
-                className="w-full bg-gradient-to-r from-[#00F0FF] to-[#FF1CF7] relative z-50 overflow-hidden"
+                className="w-full bg-transparent relative z-50 overflow-hidden"
             >
                 <div className="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-center flex-wrap">
@@ -37,7 +37,7 @@ const AnnouncementBar = () => {
                             <span className="flex p-1 rounded-lg bg-black/20 mr-3">
                                 <span className="animate-pulse flex h-2 w-2 rounded-full bg-white"></span>
                             </span>
-                            <p className="font-bold text-black text-sm sm:text-base tracking-wide">
+                            <p className="font-bold text-white text-sm sm:text-base tracking-wide">
                                 <span className="md:inline uppercase">{announcement.text}</span>
                             </p>
                         </div>

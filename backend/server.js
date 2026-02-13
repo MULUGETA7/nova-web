@@ -23,6 +23,7 @@ const clientRoutes = require("./routes/clientRoutes");
 const profileRoutes = require("./routes/profileRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 const announcementRoutes = require("./routes/announcementRoutes");
+const pageRoutes = require("./routes/pageRoutes");
 const { seedAdmin } = require("./seeder/adminSeeder")
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -85,6 +86,7 @@ app.use("/api/clients", clientRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/announcements", announcementRoutes);
+app.use("/api/pages", pageRoutes);
 
 // ✅ Default Route
 app.get("/", (req, res) => {

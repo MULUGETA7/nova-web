@@ -26,19 +26,25 @@ const AdminPartners = () => {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
+    category: '',
+    subtitle: '',
+    linkedinUrl: '',
+    instagramUrl: '',
     logo: null
   });
 
   useEffect(() => {
-    fetchPartners();
+    fetchPartners().catch(err => console.error("Unhandled fetchPartners error:", err));
   }, []);
 
   const fetchPartners = async () => {
     try {
       setLoading(true);
       const response = await axios.get(`${API_BASE_URL}/api/partner`);
+      console.log("Admin Innovation Showcase Fetch Success:", response.data);
       setPartners(response.data || []);
     } catch (err) {
+      console.error("DEBUG: AdminPartners Fetch Error:", err);
       setError('Failed to fetch partners');
     } finally {
       setLoading(false);
@@ -51,6 +57,10 @@ const AdminPartners = () => {
       setFormData({
         name: item.name || '',
         description: item.description || '',
+        category: item.category || '',
+        subtitle: item.subtitle || '',
+        linkedinUrl: item.linkedinUrl || '',
+        instagramUrl: item.instagramUrl || '',
         logo: null
       });
     } else {
@@ -58,6 +68,10 @@ const AdminPartners = () => {
       setFormData({
         name: '',
         description: '',
+        category: '',
+        subtitle: '',
+        linkedinUrl: '',
+        instagramUrl: '',
         logo: null
       });
     }
@@ -72,6 +86,10 @@ const AdminPartners = () => {
     const data = new FormData();
     data.append('name', formData.name);
     data.append('description', formData.description);
+    data.append('category', formData.category);
+    data.append('subtitle', formData.subtitle);
+    data.append('linkedinUrl', formData.linkedinUrl);
+    data.append('instagramUrl', formData.instagramUrl);
     if (formData.logo) {
       data.append('logo', formData.logo);
     }
@@ -127,9 +145,9 @@ const AdminPartners = () => {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
           <div>
             <h1 className="text-4xl font-black text-white tracking-tight italic">
-              ALLIANCE <span className="nova-gradient-text uppercase">Network</span>
+              INNOVATION <span className="nova-gradient-text uppercase">Showcase</span>
             </h1>
-            <p className="text-gray-500 mt-1 font-medium uppercase tracking-[0.2em] text-[10px]">Ecosystem Partnership Management</p>
+            <p className="text-gray-500 mt-1 font-medium uppercase tracking-[0.2em] text-[10px]">Product & Innovation Management</p>
           </div>
 
           <button
@@ -138,7 +156,7 @@ const AdminPartners = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 opacity-0 group-hover:opacity-10 transition-opacity" />
             <PlusIcon className="w-4 h-4" />
-            Add Partner
+            Add Showcase Item
           </button>
         </div>
 
@@ -149,7 +167,7 @@ const AdminPartners = () => {
           </div>
         )}
 
-        {/* Partners Grid */}
+        {/* Showcase Grid */}
         <motion.div
           variants={container}
           initial="hidden"
@@ -195,11 +213,11 @@ const AdminPartners = () => {
                   {partner.name}
                 </h3>
                 <p className="text-xs text-gray-500 line-clamp-2 font-medium leading-relaxed mb-4">
-                  {partner.description || 'Verified strategic partner within the Nova Labs ecosystem.'}
+                  {partner.description || 'Verified product featured in the Nova Labs Innovation Showcase.'}
                 </p>
                 <div className="flex justify-center gap-2">
                   <div className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[8px] font-black text-gray-500 uppercase tracking-widest">
-                    Verified Alliance
+                    Featured Product
                   </div>
                 </div>
               </div>
@@ -211,8 +229,8 @@ const AdminPartners = () => {
               <div className="w-20 h-20 mx-auto rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center mb-6">
                 <GlobeAltIcon className="w-10 h-10 text-gray-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-400">Zero Alliances</h3>
-              <p className="text-gray-600 text-sm mt-2">Initialize your first strategic partnership to scale.</p>
+              <h3 className="text-xl font-bold text-gray-400">Zero Innovation Items</h3>
+              <p className="text-gray-600 text-sm mt-2">Initialize your first product showcase item.</p>
             </div>
           )}
         </motion.div>
@@ -246,36 +264,84 @@ const AdminPartners = () => {
               </div>
 
               <h2 className="text-3xl font-black text-white mb-8 tracking-tighter italic">
-                {editingItem ? 'REFINE' : 'ESTABLISH'} <span className="text-gray-500 font-light uppercase">Partner</span>
+                {editingItem ? 'REFINE' : 'ESTABLISH'} <span className="text-gray-500 font-light uppercase">Showcase</span>
               </h2>
 
               <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Product Title</label>
+                    <input
+                      type="text"
+                      required
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500/40 transition-all font-medium"
+                      placeholder="e.g. Nova AI"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Subtitle / Tagline</label>
+                    <input
+                      type="text"
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500/40 transition-all font-medium"
+                      placeholder="e.g. CORE ARCHITECTURE"
+                      value={formData.subtitle}
+                      onChange={(e) => setFormData({ ...formData, subtitle: e.target.value })}
+                    />
+                  </div>
+                </div>
+
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Company Name</label>
+                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Category & Type</label>
                   <input
                     type="text"
-                    required
                     className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500/40 transition-all font-medium"
-                    placeholder="e.g. Cyberdyne Systems"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    placeholder="e.g. TECHNOLOGY / NEXT-GEN"
+                    value={formData.category}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Alliance Abstract</label>
+                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Innovation Abstract</label>
                   <textarea
                     rows="3"
                     required
                     className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500/40 transition-all font-medium resize-none"
-                    placeholder="Briefly describe the partnership level..."
+                    placeholder="Briefly describe the breakthrough..."
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   />
                 </div>
 
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">LinkedIn URL</label>
+                    <input
+                      type="url"
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500/40 transition-all font-medium text-xs"
+                      placeholder="https://linkedin.com/..."
+                      value={formData.linkedinUrl}
+                      onChange={(e) => setFormData({ ...formData, linkedinUrl: e.target.value })}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Instagram URL</label>
+                    <input
+                      type="url"
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500/40 transition-all font-medium text-xs"
+                      placeholder="https://instagram.com/..."
+                      value={formData.instagramUrl}
+                      onChange={(e) => setFormData({ ...formData, instagramUrl: e.target.value })}
+                    />
+                  </div>
+                </div>
+
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Corporate Identity (Logo)</label>
+                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Innovation Identity (Large Image)</label>
                   <div className="relative group">
                     <input
                       type="file"
@@ -285,7 +351,7 @@ const AdminPartners = () => {
                     <div className="w-full bg-white/[0.03] border border-white/5 border-dashed group-hover:border-purple-500/30 rounded-2xl py-8 flex flex-col items-center justify-center transition-all">
                       <CloudArrowUpIcon className="w-8 h-8 text-gray-600 group-hover:text-purple-400 transition-colors mb-2" />
                       <span className="text-xs font-bold text-gray-500">
-                        {formData.logo ? formData.logo.name : 'Upload logo package or click to scan'}
+                        {formData.logo ? formData.logo.name : 'Upload product visual or click to scan'}
                       </span>
                     </div>
                   </div>
@@ -296,7 +362,7 @@ const AdminPartners = () => {
                   disabled={saving}
                   className="w-full py-5 mt-4 rounded-2xl nova-gradient-bg text-white font-black uppercase tracking-widest text-xs shadow-xl shadow-purple-500/20 hover:scale-[1.02] transition-transform disabled:opacity-50"
                 >
-                  {saving ? 'Synching Alliance...' : (editingItem ? 'Update Credentials' : 'Certify Partnership')}
+                  {saving ? 'Synching Product...' : (editingItem ? 'Update Showcase Item' : 'Publish to Showcase')}
                 </button>
               </form>
             </motion.div>

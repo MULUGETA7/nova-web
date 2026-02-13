@@ -9,6 +9,10 @@ const partnerValidationSchema = Joi.object({
     "string.min": "Description must be at least 10 characters long",
     "any.required": "Description is required",
   }),
+  category: Joi.string().allow('', null),
+  subtitle: Joi.string().allow('', null),
+  linkedinUrl: Joi.string().uri().allow('', null),
+  instagramUrl: Joi.string().uri().allow('', null),
 });
 
 module.exports = partnerValidationSchema;

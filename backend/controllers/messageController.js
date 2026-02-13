@@ -5,7 +5,7 @@ const Message = require("../models/message");
 // @access  Public
 exports.createMessage = async (req, res) => {
     try {
-        const { name, email, subject, content } = req.body;
+        const { name, email, subject, content, source } = req.body;
 
         if (!name || !email || !subject || !content) {
             return res.status(400).json({ message: "All fields are required" });
@@ -16,11 +16,15 @@ exports.createMessage = async (req, res) => {
             email,
             subject,
             content,
+            source: source || "unknown",
         });
 
         await newMessage.save();
 
-        res.status(201).json({ message: "Intelligence transmission successful. We will respond shortly." });
+        res.status(201).json({
+            message: "Intelligence transmission successful. We will respond shortly.",
+            data: newMessage
+        });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -31,7 +35,9 @@ exports.createMessage = async (req, res) => {
 // @access  Private/Admin
 exports.getAllMessages = async (req, res) => {
     try {
-        const messages = await Message.find().sort({ createdAt: -1 });
+        const { source } = req.query;
+        const filter = source ? { source } : {};
+        const messages = await Message.find(filter).sort({ createdAt: -1 });
         res.status(200).json(messages);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -44,7 +50,7 @@ exports.getAllMessages = async (req, res) => {
 exports.updateMessageStatus = async (req, res) => {
     try {
         const { status } = req.body;
-        if (!status || !["read", "unread"].includes(status)) {
+        if (!status || !["read", "unread", "replied"].includes(status)) {
             return res.status(400).json({ message: "Valid status is required" });
         }
 
@@ -59,6 +65,53 @@ exports.updateMessageStatus = async (req, res) => {
         }
 
         res.status(200).json(message);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+// @desc    Reply to a message
+// @route   PUT /api/messages/:id/reply
+// @access  Private/Admin
+exports.replyToMessage = async (req, res) => {
+    try {
+        const { reply } = req.body;
+        if (!reply || !reply.trim()) {
+            return res.status(400).json({ message: "Reply content is required" });
+        }
+
+        const message = await Message.findByIdAndUpdate(
+            req.params.id,
+            {
+                reply: reply.trim(),
+                repliedAt: new Date(),
+                status: "replied"
+            },
+            { new: true }
+        );
+
+        if (!message) {
+            return res.status(404).json({ message: "Inquiry not found" });
+        }
+
+        res.status(200).json(message);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+// @desc    Get replies for a specific email (public - for frontend chat)
+// @route   GET /api/messages/replies/:email
+// @access  Public
+exports.getRepliesByEmail = async (req, res) => {
+    try {
+        const { email } = req.params;
+        const messages = await Message.find({
+            email: email.toLowerCase(),
+            reply: { $ne: null }
+        }).sort({ repliedAt: -1 }).select('subject content reply repliedAt source');
+
+        res.status(200).json(messages);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

@@ -7,7 +7,7 @@ exports.protect = (req, res, next) => {
     if (!token) return res.status(401).json({ message: "Not authorized, token missing" });
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    
+
     // ✅ Attach only necessary fields to `req.user`
     req.user = {
       id: decoded.id,
@@ -20,10 +20,11 @@ exports.protect = (req, res, next) => {
   }
 };
 
-// Middleware to check if user is an admin
+// Middleware to check if user is an admin or superadmin
 exports.admin = (req, res, next) => {
-  if (req.user.role !== "admin") {
-    return res.status(403).json({ message: "Access denied, admin only" });
+  const allowedRoles = ["admin", "superadmin"];
+  if (!allowedRoles.includes(req.user.role)) {
+    return res.status(403).json({ message: "Access denied, administrative privileges required" });
   }
   next();
 };

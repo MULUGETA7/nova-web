@@ -110,25 +110,7 @@ function HackatonShow() {
     <div className="relative min-h-[400px] sm:min-h-[500px] md:min-h-screen hackaton-scroll-container">
       <div className="relative">
         <div className="text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-12"
-          >
-            <p className="text-[10px] font-black text-gray-500 mb-8 uppercase tracking-[0.4em]">
-              Global Infrastructure Network
-            </p>
-            <div className="flex flex-wrap justify-center items-center gap-12 px-4 opacity-50">
-              {['google cloud', 'Telekom 1', 'tencent-cloud 1', 'logo-aws 1', 'AXELAR 1', 'Ledger 1', 'ethio'].map((icon) => (
-                <img
-                  key={icon}
-                  src={require(`../icon/${icon}.png`)}
-                  alt={icon.split(' ')[0]}
-                  className={`h-6 md:h-8 grayscale hover:grayscale-0 transition-all ${icon === 'ethio' ? 'invert' : ''}`}
-                />
-              ))}
-            </div>
-          </motion.div>
+
 
           <div className="flex justify-center items-center p-6 mt-8">
             <button
@@ -146,16 +128,11 @@ function HackatonShow() {
           </div>
 
           <div className="w-full px-4 md:px-12 relative py-4">
-            <GradientText
-              colors={["#ff1cf7", "#00f0ff", "#ff1cf7", "#00f0ff", "#00f0ff"]}
-              animationSpeed={3}
-              showBorder={false}
-              className="text-4xl md:text-6xl font-black mb-6 leading-none mx-auto tracking-tighter italic"
-            >
+            <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase mb-6 leading-none mx-auto">
               ACCELERATING THE
               <br />
               NEXT GEN OF BUILDS
-            </GradientText>
+            </h1>
           </div>
 
           <motion.p
@@ -190,16 +167,20 @@ function HackatonShow() {
             </div>
 
             <div className="w-full px-4 md:px-12 relative mt-16 mb-12">
-              <GradientText
-                colors={["#ff1cf7", "#00f0ff", "#ff1cf7", "#00f0ff", "#00f0ff"]}
-                animationSpeed={3}
-                showBorder={false}
-                className="text-2xl md:text-3xl font-black uppercase tracking-tighter italic text-left"
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="flex flex-col border-l-2 border-white/20 pl-6 text-left"
               >
-                INDIVIDUALLY WE BUILD,
-                <br />
-                TOGETHER WE INNOVATE.
-              </GradientText>
+                <h3 className="text-white text-3xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9] mb-4">
+                  A Product Studio Building the <br />
+                  Next Generation of Intelligent Systems,
+                </h3>
+                <p className="text-white/40 text-[10px] md:text-xs font-black uppercase tracking-[0.4em] leading-tight">
+                  Powered by a Collective of Engineers and Designers
+                </p>
+              </motion.div>
             </div>
           </div>
         </div>

@@ -23,6 +23,8 @@ import AdminPortfolio from './components/portfolio/AdminPortfolio'; // Ensure th
 import AdminClients from './components/clients/AdminClients';
 import InquiryList from './components/inquiries/InquiryList';
 import AnnouncementManager from './components/announcements/AnnouncementManager';
+import PageList from './components/pages/PageList';
+import PageEditor from './components/pages/PageEditor';
 
 function App() {
   return (
@@ -56,7 +58,7 @@ function App() {
           <Route
             path="/news"
             element={
-              <PrivateRoute roles={['Admin', 'Editor']}>
+              <PrivateRoute roles={['Admin', 'admin', 'superadmin', 'Editor', 'editor']}>
                 <Layout>
                   <NewsList />
                 </Layout>
@@ -66,7 +68,7 @@ function App() {
           <Route
             path="/news/add"
             element={
-              <PrivateRoute roles={['Admin', 'Editor']}>
+              <PrivateRoute roles={['Admin', 'admin', 'superadmin', 'Editor', 'editor']}>
                 <Layout>
                   <NewsAdd />
                 </Layout>
@@ -76,7 +78,7 @@ function App() {
           <Route
             path="/news/edit/:id"
             element={
-              <PrivateRoute roles={['Admin', 'Editor']}>
+              <PrivateRoute roles={['Admin', 'admin', 'superadmin', 'Editor', 'editor']}>
                 <Layout>
                   <NewsEdit />
                 </Layout>
@@ -86,7 +88,7 @@ function App() {
           <Route
             path="/hackathon-images"
             element={
-              <PrivateRoute roles={['Admin', 'Editor']}>
+              <PrivateRoute roles={['Admin', 'admin', 'superadmin', 'Editor', 'editor']}>
                 <Layout>
                   <ImageGallery />
                 </Layout>
@@ -96,7 +98,7 @@ function App() {
           <Route
             path="/hackathon-images/upload"
             element={
-              <PrivateRoute roles={['Admin', 'Editor']}>
+              <PrivateRoute roles={['Admin', 'admin', 'superadmin', 'Editor', 'editor']}>
                 <Layout>
                   <ImageUpload />
                 </Layout>
@@ -106,7 +108,7 @@ function App() {
           <Route
             path="/admin/partners"
             element={
-              <PrivateRoute roles={['Admin']}>
+              <PrivateRoute roles={['Admin', 'admin', 'superadmin']}>
                 <Layout>
                   <AdminPartners />
                 </Layout>
@@ -116,7 +118,7 @@ function App() {
           <Route
             path="/admin/portfolio"
             element={
-              <PrivateRoute roles={['Admin']}>
+              <PrivateRoute roles={['Admin', 'admin', 'superadmin']}>
                 <Layout>
                   <AdminPortfolio />
                 </Layout>
@@ -126,7 +128,7 @@ function App() {
           <Route
             path="/admin/clients"
             element={
-              <PrivateRoute roles={['Admin']}>
+              <PrivateRoute roles={['Admin', 'admin', 'superadmin']}>
                 <Layout>
                   <AdminClients />
                 </Layout>
@@ -136,7 +138,7 @@ function App() {
           <Route
             path="/users"
             element={
-              <PrivateRoute roles={['Admin']}>
+              <PrivateRoute roles={['Admin', 'admin', 'superadmin']}>
                 <Layout>
                   <UserList />
                 </Layout>
@@ -146,7 +148,7 @@ function App() {
           <Route
             path="/users/add"
             element={
-              <PrivateRoute roles={['Admin']}>
+              <PrivateRoute roles={['Admin', 'admin', 'superadmin']}>
                 <Layout>
                   <UserAdd />
                 </Layout>
@@ -157,7 +159,7 @@ function App() {
           <Route
             path="/users/edit/:id"
             element={
-              <PrivateRoute roles={['Admin']}>
+              <PrivateRoute roles={['Admin', 'admin', 'superadmin']}>
                 <Layout>
                   <UserEdit />
                 </Layout>
@@ -167,7 +169,7 @@ function App() {
           <Route
             path="/inquiries"
             element={
-              <PrivateRoute roles={['Admin']}>
+              <PrivateRoute roles={['Admin', 'admin', 'superadmin']}>
                 <Layout>
                   <InquiryList />
                 </Layout>
@@ -177,9 +179,39 @@ function App() {
           <Route
             path="/announcements"
             element={
-              <PrivateRoute roles={['Admin']}>
+              <PrivateRoute roles={['Admin', 'admin', 'superadmin']}>
                 <Layout>
                   <AnnouncementManager />
+                </Layout>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/pages"
+            element={
+              <PrivateRoute roles={['Admin', 'admin', 'superadmin']}>
+                <Layout>
+                  <PageList />
+                </Layout>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/pages/add"
+            element={
+              <PrivateRoute roles={['Admin', 'admin', 'superadmin']}>
+                <Layout>
+                  <PageEditor />
+                </Layout>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/pages/edit/:id"
+            element={
+              <PrivateRoute roles={['Admin', 'admin', 'superadmin']}>
+                <Layout>
+                  <PageEditor />
                 </Layout>
               </PrivateRoute>
             }

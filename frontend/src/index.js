@@ -6,6 +6,15 @@ import reportWebVitals from './reportWebVitals';
 
 export { default as Novalabs } from './Novalabs';
 
+window.addEventListener('unhandledrejection', (event) => {
+  console.error('CRITICAL UNHANDLED REJECTION:', {
+    reason: event.reason,
+    promise: event.promise,
+    message: event.reason?.message || 'No message',
+    stack: event.reason?.stack || 'No stack'
+  });
+});
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

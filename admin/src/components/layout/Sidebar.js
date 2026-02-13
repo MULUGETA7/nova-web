@@ -13,7 +13,8 @@ import {
   GlobeAltIcon,
   BuildingOfficeIcon,
   ChatBubbleLeftRightIcon,
-  MegaphoneIcon
+  MegaphoneIcon,
+  DocumentDuplicateIcon
 } from '@heroicons/react/24/outline';
 const Sidebar = ({ onClose }) => {
   const { currentUser, logout } = useAuth();
@@ -25,9 +26,10 @@ const Sidebar = ({ onClose }) => {
     { name: 'Hackathon Images', href: '/hackathon-images', icon: PhotoIcon },
     { name: 'User Inquiries', href: '/inquiries', icon: ChatBubbleLeftRightIcon, adminOnly: true },
     { name: 'User Management', href: '/users', icon: UsersIcon, adminOnly: true },
-    { name: 'Admin Partners', href: '/admin/partners', icon: BriefcaseIcon, adminOnly: true },
+    { name: 'Innovation Showcase', href: '/admin/partners', icon: BriefcaseIcon, adminOnly: true },
     { name: 'Admin Portfolio', href: '/admin/portfolio', icon: GlobeAltIcon, adminOnly: true },
     { name: 'Admin Clients', href: '/admin/clients', icon: BuildingOfficeIcon, adminOnly: true },
+    { name: 'Page Management', href: '/admin/pages', icon: DocumentDuplicateIcon, adminOnly: true },
     { name: 'Live Announcements', href: '/announcements', icon: MegaphoneIcon, adminOnly: true },
     { name: 'Profile Settings', href: '/profile', icon: UserCircleIcon },
   ].filter(item => !item.adminOnly || isAdmin);

@@ -16,6 +16,23 @@ const partnerSchema = new mongoose.Schema({
     required: [true, "Description is required"],
     minlength: [10, "Description must be at least 10 characters long"],
   },
+  category: {
+    type: String,
+    default: "TECHNOLOGY / CORE",
+    trim: true,
+  },
+  subtitle: {
+    type: String,
+    trim: true,
+  },
+  linkedinUrl: {
+    type: String,
+    trim: true,
+  },
+  instagramUrl: {
+    type: String,
+    trim: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

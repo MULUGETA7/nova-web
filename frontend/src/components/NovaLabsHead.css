@@ -12,8 +12,10 @@
   font-size: 7.5vw;
   /* Use viewport width for responsiveness */
   font-family: 'Montserrat', sans-serif;
-  font-weight: 500;
-  letter-spacing: 1.6px;
+  font-weight: 800;
+  /* Bolder font */
+  letter-spacing: -0.02em;
+  /* Tighter tracking for modern look */
   margin-bottom: -16px;
   /* Adjusts spacing for large screens */
   white-space: nowrap;
@@ -24,8 +26,9 @@
   font-size: 5.5vw;
   /* Use viewport width for responsiveness */
   font-family: 'Montserrat', sans-serif;
-  font-weight: 500;
-  letter-spacing: 1.6px;
+  font-weight: 800;
+  /* Bolder font */
+  letter-spacing: -0.02em;
   color: #FFFFFF;
   margin-top: -8px;
   /* Adjusts spacing for large screens */

@@ -9,18 +9,18 @@ const StatsSection = () => {
         <div className="flex gap-1 max-md:flex-col">
           <div className="w-6/12 max-md:ml-0 max-md:w-full">
             <div className="text-gray-200 max-md:mt-10 max-md:max-w-full">
-              <StatCard number="12" description="projects<br>completed" />
+              <StatCard number="12+" description="projects<br>completed" />
               <div className="mt-7">
-                <StatCard number="2" description="years of<br>experience" />
+                <StatCard number="2+" description="years of<br>experience" />
               </div>
             </div>
           </div>
 
           <div className="ml-5 w-6/12 max-md:ml-0 max-md:w-full">
             <div className="grow mt-44 text-gray-200 max-md:mt-10 max-md:max-w-full">
-              <StatCard number="50" description="creative<br>minds" />
+              <StatCard number="50+" description="creative<br>minds" />
               <div className="mt-7">
-                <StatCard number="5" description="awwards &<br>recognition" />
+                <StatCard number="5+" description="awwards &<br>recognition" />
               </div>
             </div>
           </div>

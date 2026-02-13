@@ -28,7 +28,7 @@ const WorldMap = () => {
               <span className="text-[10px] font-black text-cyan-400 uppercase tracking-[0.3em]">Neural Intelligence Feed</span>
             </div>
 
-            <h1 className='text-2xl md:text-3xl font-black text-white text-center leading-tight tracking-tighter italic uppercase min-h-[4rem]'>
+            <h1 className='text-2xl md:text-3xl font-black text-white text-center leading-tight tracking-tighter uppercase min-h-[4rem]'>
               {text}
               <motion.span
                 animate={{ opacity: [1, 0] }}

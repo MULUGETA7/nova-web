@@ -4,6 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+window.addEventListener('unhandledrejection', (event) => {
+  console.error('CRITICAL UNHANDLED REJECTION [ADMIN]:', {
+    reason: event.reason,
+    promise: event.promise,
+    message: event.reason?.message || 'No message',
+    stack: event.reason?.stack || 'No stack'
+  });
+});
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

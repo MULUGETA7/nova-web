@@ -22,10 +22,23 @@ const messageSchema = new mongoose.Schema({
         required: [true, "Message content is required"],
         trim: true,
     },
+    source: {
+        type: String,
+        enum: ["dev_terminal", "chat_widget", "unknown"],
+        default: "unknown",
+    },
     status: {
         type: String,
-        enum: ["unread", "read"],
+        enum: ["unread", "read", "replied"],
         default: "unread",
+    },
+    reply: {
+        type: String,
+        default: null,
+    },
+    repliedAt: {
+        type: Date,
+        default: null,
     },
     createdAt: {
         type: Date,
