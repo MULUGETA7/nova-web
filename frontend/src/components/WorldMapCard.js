@@ -4,12 +4,12 @@ export function WorldMapCard() {
   return (
     <>
       <div className="relative overflow-hidden rounded-[37px] w-[426px] h-[230px]">
-        <img 
+        <img
           src={require('../assets/images/World.png')}
           alt="Nova Labs World Map"
           className="w-full h-full rounded-[37px] object-cover"
         />
-        
+
         {/* Location Dots */}
         <div className="absolute top-[50%] left-[35%] w-2 h-2 bg-[#00F0FF] rounded-full animate-pulse"></div>
         <div className="absolute top-[8%] left-[30%] w-2 h-2 bg-[#00F0FF] rounded-full animate-pulse"></div>

@@ -1,0 +1,205 @@
+/* ── Nova Labs Intro Premium Styles ──────────────────────── */
+
+.intro-container {
+    position: relative;
+    background-color: #000000;
+    overflow-x: hidden;
+    /* Prevent horizontal scroll */
+    z-index: 10;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .intro-container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+}
+
+/* Background Elements */
+.intro-glow-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* New Tag Styling */
+.tag-badge {
+    background: rgba(15, 75, 79, 0.4);
+    backdrop-filter: blur(10px);
+    border-radius: 100px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.tag-badge:hover {
+    border-color: rgba(255, 28, 247, 0.4);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+}
+
+.tag-pill {
+    background: linear-gradient(180deg, #ff1cf7 0%, #00f0ff 100%);
+    color: white;
+    font-weight: 900;
+    font-size: 0.75rem;
+    padding: 6px 16px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.tag-text {
+    padding: 0 20px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    background: linear-gradient(to right, #ff1cf7, #00f0ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Typography Hierarchy */
+.intro-title {
+    font-size: clamp(1.4rem, 5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+}
+
+.intro-desc {
+    font-size: clamp(0.85rem, 2vw, 1.5rem);
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 900px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.6;
+}
+
+/* Premium Buttons */
+.btn-primary-nova {
+    background: linear-gradient(180deg, #ff1cf7 0%, #00f0ff 100%);
+    color: #000;
+    font-weight: 800;
+    padding: 1rem 2.5rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 20px rgba(0, 240, 255, 0.2);
+}
+
+.btn-primary-nova:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(255, 28, 247, 0.3);
+}
+
+.btn-secondary-nova {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    font-weight: 700;
+    padding: 1rem 2.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary-nova:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(0, 240, 255, 0.4);
+    transform: translateY(-4px);
+}
+
+/* Card Grid Polish */
+.intro-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+}
+
+.intro-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 32px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.intro-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(0, 240, 255, 0.3);
+    transform: translateY(-10px);
+}
+
+.intro-card-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.intro-card-value {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.intro-card-highlight,
+.gradient-text-brand {
+    background: linear-gradient(90deg, #ff1cf7 0%, #00f0ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 900;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+    .intro-title {
+        word-break: break-word;
+        text-align: center;
+        padding: 0 1rem;
+    }
+
+    .intro-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .btn-primary-nova,
+    .btn-secondary-nova {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.85rem;
+    }
+
+    .tag-pill {
+        font-size: 0.6rem;
+        padding: 4px 10px;
+    }
+
+    .tag-text {
+        font-size: 0.7rem;
+        padding: 0 8px;
+    }
+}

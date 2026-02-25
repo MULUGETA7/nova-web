@@ -47,7 +47,7 @@ const App = () => {
               <div>
                 {/* Load immediately - Critical content */}
                 <ImageComponent />
-                <div className="relative mt-0">
+                <div className="relative mt-0 md:mt-8">
                   <NovaLabsIntro />
                   <WhyChooseUs />
 
@@ -96,8 +96,8 @@ const App = () => {
             }
           />
           {/* Other Pages - All lazy loaded */}
-          {/* Nova Creative - Redirects to home page */}
-          <Route path="/nova-creative" element={<Navigate to="/" replace />} />
+          {/* Trend - Redirects to home page */}
+          <Route path="/trend" element={<Navigate to="/" replace />} />
           {/* Nova Flow - Redirects to home page */}
           <Route path="/nova-flow" element={<Navigate to="/" replace />} />
           {/* Agent 7 - Redirects to home page */}

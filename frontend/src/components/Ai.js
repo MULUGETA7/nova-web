@@ -10,7 +10,7 @@ const Ai = () => {
 
   return (
     <>
-      <div className='bg-[#0a0a0a] pb-60 pt-60 overflow-visible'>
+      <div className='bg-[#0a0a0a] pb-60 pt-10 md:pt-60 overflow-visible'>
         <AnimateOnScroll animation="slideLeft">
           <SecuredSection />
         </AnimateOnScroll>

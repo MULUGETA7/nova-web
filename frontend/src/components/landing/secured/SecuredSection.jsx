@@ -31,31 +31,30 @@ const SecuredSection = () => {
 
   return (
     <section className="overflow-visible relative w-full ">
-      <div className="relative px-20 pt-20 pb-32 mx-auto ">
+      <div className="relative px-4 md:px-20 pt-4 md:pt-20 pb-32 mx-auto ">
         <BackgroundImages />
 
-        <div className="flex mt-[150px] relative flex-col justify-center items-center mx-auto mt-20 z-[1]">
+        <div className="flex mt-0 md:mt-[150px] relative flex-col justify-center items-center mx-auto z-[1]">
           {/* <GradientBadge text="Innovating AI" className="mb-7" /> */}
 
           <h1 className="mb-5 text-6xl font-medium tracking-tighter text-center leading-[94.5px] text-neutral-100 max-md:text-6xl max-md:leading-[70px] max-sm:text-4xl max-sm:leading-10">
-            Innovating AI
+            Innovating with AI
           </h1>
 
-          <p className="mb-10 text-base leading-9 text-center max-w-[520px] text-white max-md:text-lg max-md:leading-7 max-sm:text-base max-sm:leading-6">
-            Nova Labs is also a leading provider of AI solutions, including
-            custom AI models and services. and feature-rich AI tools. if you want to add AI to your project, we are the right partner for you.
+          <p className="mb-10 text-base leading-9 text-center max-w-[520px] text-white/80 max-md:text-lg max-md:leading-7 max-sm:text-base max-sm:leading-6">
+            Nova Labs is a leading provider of AI solutions — from custom-trained models and intelligent automation to feature-rich AI tools. If you're ready to bring AI into your product, we're the partner built for it.
           </p>
 
           <div className="flex gap-4 justify-center max-sm:flex-col max-sm:w-full">
             <ActionButton
-              text="About us"
+              text="About Us"
               icon={arrowIcon}
               isPrimary={true}
               className="px-6"
             />
 
             <ActionButton
-              text="works"
+              text="Our Works"
               icon={stakeIcon}
               isPrimary={false}
             />

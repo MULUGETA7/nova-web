@@ -1,32 +1,160 @@
-/* Curved Lines Animation */
-@keyframes wave {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(100px);
-  }
+/* ── Why Choose Us Premium Styling ──────────────────────── */
+
+.why-choose-us-section {
+  position: relative;
+  background-color: #000000;
+  overflow: hidden;
+  padding: 8rem 0;
 }
 
-.curved-line {
-  animation: wave 8s linear infinite;
-}
-
-/* Gradient Text */
-.gradient-text {
-  background: linear-gradient(to right, #9333EA, #F87171);
+.gradient-text-brand {
+  background: linear-gradient(90deg, #FF1CF7 0%, #00F0FF 100%);
   -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   background-clip: text;
-  color: transparent;
 }
 
-/* Card Hover Effects */
-.card-hover {
+/* Glass Card Base */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(0, 240, 255, 0.3);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 240, 255, 0.1);
+}
+
+/* Experience Counter */
+.exp-badge {
+  background: rgba(15, 15, 15, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: fit-content;
+}
+
+.exp-number {
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.exp-text {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.2;
+}
+
+/* Contact Card Styling */
+.contact-card-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
 }
 
-.card-hover:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+.contact-card-link:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 28, 247, 0.3);
 }
 
+.icon-box-cyan {
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  color: #00f0ff;
+}
+
+.icon-box-pink {
+  background: rgba(255, 28, 247, 0.1);
+  border: 1px solid rgba(255, 28, 247, 0.2);
+  color: #ff1cf7;
+}
+
+/* Section Tag */
+.section-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #00f0ff;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  font-size: 0.8rem;
+  margin-bottom: 2rem;
+}
+
+.tag-line {
+  height: 2px;
+  width: 30px;
+  background: linear-gradient(to right, #00f0ff, transparent);
+}
+
+/* Utility Animations */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Collaboration Footer Polish */
+.collaboration-glass-card {
+  padding: 4rem 2rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 40px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  margin-top: 4rem;
+}
+
+.collaboration-glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.collaboration-quote {
+  font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+  color: #ffffff;
+  font-weight: 500;
+  line-height: 1.5;
+  font-style: italic;
+  text-align: center;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  letter-spacing: -0.01em;
+}
