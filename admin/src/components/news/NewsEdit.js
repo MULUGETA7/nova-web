@@ -6,7 +6,6 @@ import 'react-quill/dist/quill.snow.css';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeftIcon,
-  NewspaperIcon,
   CalendarDaysIcon,
   TagIcon,
   CloudArrowUpIcon,

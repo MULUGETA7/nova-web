@@ -33,6 +33,20 @@ const partnerSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  buttonText: {
+    type: String,
+    trim: true,
+    default: "Explore Product",
+  },
+  buttonUrl: {
+    type: String,
+    trim: true,
+  },
+  bgColor: {
+    type: String,
+    trim: true,
+    default: "#00D1FF",
+  },
   createdAt: {
     type: Date,
     default: Date.now,

@@ -7,12 +7,13 @@ const createClient = async (req, res) => {
             return res.status(400).json({ error: "Client logo is required" });
         }
 
-        const { name } = req.body;
+        const { name, type } = req.body;
         const logoUrl = `/uploads/${req.file.filename}`;
 
         const client = new Client({
             name,
             logo: logoUrl,
+            type: type || 'client'
         });
 
         await client.save();

@@ -39,7 +39,7 @@ const ProfileSettings = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const [sessionInfo, setSessionInfo] = useState({
+  const [sessionInfo] = useState({
     userAgent: navigator.userAgent,
     platform: navigator.platform,
     language: navigator.language,

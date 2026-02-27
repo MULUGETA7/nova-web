@@ -10,6 +10,11 @@ const clientSchema = new mongoose.Schema({
         type: String, // Image URL
         required: [true, "Logo is required"],
     },
+    type: {
+        type: String,
+        enum: ["client", "partner"],
+        default: "client",
+    },
     createdAt: {
         type: Date,
         default: Date.now,

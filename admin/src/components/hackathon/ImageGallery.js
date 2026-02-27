@@ -10,10 +10,8 @@ import {
   CloudArrowUpIcon,
   CalendarDaysIcon,
   InformationCircleIcon,
-  Square3Stack3DIcon,
   CameraIcon,
-  ChartBarIcon,
-  DocumentTextIcon
+  ChartBarIcon
 } from '@heroicons/react/24/outline';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';

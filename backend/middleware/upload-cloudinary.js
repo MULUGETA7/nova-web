@@ -14,20 +14,23 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: "novalabs", // Folder name in Cloudinary
-    allowed_formats: ["jpg", "jpeg", "png"], // Allowed formats
+    allowed_formats: ["jpg", "jpeg", "png", "gif", "webp", "svg"], // Allowed formats
     transformation: [{ width: 1920, height: 1080, crop: "limit" }], // Optional: Resize images
   },
 });
 
 // ✅ File filter to allow only images
 const fileFilter = (req, file, cb) => {
-  const allowedTypes = /jpeg|jpg|png/;
-  const isValidType = allowedTypes.test(file.mimetype);
+  const allowedTypes = /jpeg|jpg|png|gif|webp|svg/;
+  const mimetype = file.mimetype;
+  const extname = path.extname(file.originalname).toLowerCase();
+
+  const isValidType = allowedTypes.test(mimetype) || allowedTypes.test(extname);
 
   if (isValidType) {
     cb(null, true);
   } else {
-    cb(new Error("Only images (jpeg, jpg, png) are allowed"));
+    cb(new Error("Only images (jpeg, jpg, png, gif, webp, svg) are allowed"));
   }
 };
 

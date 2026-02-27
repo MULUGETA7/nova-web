@@ -7,7 +7,7 @@ const createPartner = async (req, res) => {
     const { error } = partnerValidationSchema.validate(req.body);
     if (error) return res.status(400).json({ error: error.details[0].message });
 
-    const { name, description, category, subtitle, linkedinUrl, instagramUrl } = req.body;
+    const { name, description, category, subtitle, linkedinUrl, instagramUrl, buttonText, buttonUrl, bgColor } = req.body;
     let logoUrl = req.file ? `/uploads/${req.file.filename}` : null;
 
     if (!logoUrl) return res.status(400).json({ error: "Logo image is required" });
@@ -19,7 +19,10 @@ const createPartner = async (req, res) => {
       category,
       subtitle,
       linkedinUrl,
-      instagramUrl
+      instagramUrl,
+      buttonText,
+      buttonUrl,
+      bgColor
     });
 
     await partner.save();
@@ -57,7 +60,7 @@ const updatePartner = async (req, res) => {
     const { error } = partnerValidationSchema.validate(req.body);
     if (error) return res.status(400).json({ error: error.details[0].message });
 
-    const { name, description, category, subtitle, linkedinUrl, instagramUrl } = req.body;
+    const { name, description, category, subtitle, linkedinUrl, instagramUrl, buttonText, buttonUrl, bgColor } = req.body;
     let logoUrl = req.file ? `/uploads/${req.file.filename}` : undefined;
 
     const updatedPartner = await Partner.findByIdAndUpdate(
@@ -69,6 +72,9 @@ const updatePartner = async (req, res) => {
         subtitle,
         linkedinUrl,
         instagramUrl,
+        buttonText,
+        buttonUrl,
+        bgColor,
         logo: logoUrl || undefined
       },
       { new: true, runValidators: true }

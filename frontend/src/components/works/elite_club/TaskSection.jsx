@@ -56,14 +56,14 @@ function PendingTasks() {
 function ProcessingIndicator() {
   return (
     <div className="px-20 py-6 text-base tracking-tight leading-6 text-center text-white bg-zinc-800">
-        Nova is Here
+      Nova is Here
     </div>
   );
 }
 
 function CompletedTasks() {
   const completedTasks = [
-    
+
     "web Development",
     "Redesign Your Site",
     "Get Your Saas Alive",

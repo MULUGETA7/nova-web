@@ -1,12 +1,12 @@
 const User = require("../models/user");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 // ✅ Get User Profile
 exports.getProfile = async (req, res) => {
   try {
     console.log('Fetching profile for user ID:', req.user.id);
     const user = await User.findById(req.user.id).select("-password");
-    
+
     if (!user) {
       console.error('User not found with ID:', req.user.id);
       return res.status(404).json({ message: "User not found" });

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '@iconify/react';
 import { getApiUrl } from '../utils/apiConfig';
@@ -31,7 +31,7 @@ const DevTerminal = ({ isOpen, onClose }) => {
     const scrollRef = useRef(null);
     const pollingRef = useRef(null);
 
-    const fetchReplies = async () => {
+    const fetchReplies = useCallback(async () => {
         try {
             const apiUrl = getApiUrl();
             // Use the terminal placeholder email to check for replies
@@ -63,7 +63,7 @@ const DevTerminal = ({ isOpen, onClose }) => {
         } catch (err) {
             console.error('Terminal polling error:', err);
         }
-    };
+    }, [lastReplyTime]);
 
     useEffect(() => {
         if (isOpen) {
@@ -75,7 +75,7 @@ const DevTerminal = ({ isOpen, onClose }) => {
         return () => {
             if (pollingRef.current) clearInterval(pollingRef.current);
         };
-    }, [isOpen, lastReplyTime]);
+    }, [isOpen, fetchReplies]);
 
     useEffect(() => {
         if (scrollRef.current) {

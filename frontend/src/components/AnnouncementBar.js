@@ -26,33 +26,42 @@ const AnnouncementBar = () => {
     return (
         <AnimatePresence>
             <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: 'auto', opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                className="w-full bg-transparent relative z-50 overflow-hidden"
+                initial={{ y: -100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -100, opacity: 0 }}
+                className="w-full fixed top-0 left-0 z-[100] pointer-events-none"
             >
-                <div className="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-center flex-wrap">
-                        <div className="flex items-center">
-                            <span className="flex p-1 rounded-lg bg-black/20 mr-3">
-                                <span className="animate-pulse flex h-2 w-2 rounded-full bg-white"></span>
-                            </span>
-                            <p className="font-bold text-white text-sm sm:text-base tracking-wide">
-                                <span className="md:inline uppercase">{announcement.text}</span>
-                            </p>
-                        </div>
-                        {announcement.link && (
-                            <div className="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto ml-0 sm:ml-4">
+                <div className="max-w-[90%] md:max-w-2xl mx-auto mt-4 pointer-events-auto">
+                    <div className="relative group">
+                        {/* Outer Glow */}
+                        <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+
+                        {/* Main Bar */}
+                        <div className="relative flex items-center justify-between gap-4 px-6 py-3 bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl">
+                            <div className="flex items-center gap-4 overflow-hidden">
+                                <div className="flex-shrink-0 relative">
+                                    <div className="w-2 h-2 rounded-full bg-cyan-500 animate-ping absolute"></div>
+                                    <div className="w-2 h-2 rounded-full bg-cyan-400 relative"></div>
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-[10px] font-black text-cyan-500/80 uppercase tracking-[0.2em] leading-none mb-1">Live Broadcast</span>
+                                    <p className="text-sm font-bold text-white tracking-tight uppercase truncate">
+                                        {announcement.text}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {announcement.link && (
                                 <a
                                     href={announcement.link}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center justify-center px-4 py-1 border border-black rounded-full shadow-sm text-xs font-black text-black bg-white hover:bg-black hover:text-white transition-all duration-300 uppercase tracking-tighter"
+                                    className="flex-shrink-0 flex items-center justify-center px-4 py-2 bg-white text-black text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-cyan-400 hover:text-black transition-all duration-300 no-underline whitespace-nowrap"
                                 >
-                                    Access Now
+                                    Verify Output
                                 </a>
-                            </div>
-                        )}
+                            )}
+                        </div>
                     </div>
                 </div>
             </motion.div>

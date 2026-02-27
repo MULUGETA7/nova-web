@@ -1,6 +1,6 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const { registerValidation, loginValidation } = require("../validations/authValidation");
 
 // Register New User
@@ -15,7 +15,7 @@ exports.signup = async (req, res) => {
       return res.status(400).json({ errors: error.details.map((err) => err.message) });
     }
 
-    const { name, email, password, role } = req.body;
+    const { name, email, password } = req.body;
     const userExists = await User.findOne({ email });
 
     if (userExists) {
@@ -23,7 +23,8 @@ exports.signup = async (req, res) => {
       return res.status(400).json({ message: "Email already exists" });
     }
 
-    const user = new User({ name, email, password, role });
+    // Default role to 'user' for safety
+    const user = new User({ name, email, password, role: 'user' });
     await user.save();
 
     console.log("User registered successfully:", email);
@@ -50,11 +51,10 @@ exports.login = async (req, res) => {
     const user = await User.findOne({ email });
 
     console.log("User found:", user ? user.email : "No user found"); // Log user existence
-    if (!user) return res.status(400).json({message: "Invalid Credentials"});
-    
+    if (!user) return res.status(400).json({ message: "Invalid Credentials" });
+
     const matchedPassword = await bcrypt.compare(password, user.password);
-    
-    console.info(matchedPassword, password, user.password, user)
+
     if (!matchedPassword) {
       console.log("Invalid email or password attempt for:", email);
       return res.status(400).json({ message: "Invalid email or password" });
@@ -67,8 +67,8 @@ exports.login = async (req, res) => {
     console.log("Login successful. Token generated."); // Log success
 
     // Return token and user data (without password)
-    res.status(200).json({ 
-      message: "Login successful", 
+    res.status(200).json({
+      message: "Login successful",
       token,
       role: user.role, // Add role at top level for frontend
       user: {
@@ -90,7 +90,7 @@ exports.getProfile = async (req, res) => {
     console.log("Fetching profile for user ID:", req.user.id);
 
     const user = await User.findById(req.user.id).select('-password');
-    
+
     if (!user) {
       console.log("User profile not found");
       return res.status(404).json({ message: "User not found" });
@@ -108,7 +108,15 @@ exports.updateProfile = async (req, res) => {
   try {
     console.log("Updating profile for user ID:", req.user.id, "with data:", req.body);
 
-    const updates = req.body;
+    const { name, email, bio, profilePicture } = req.body;
+
+    // Whitelist updates to prevent privilege escalation
+    const updates = {};
+    if (name) updates.name = name;
+    if (email) updates.email = email;
+    if (bio) updates.bio = bio;
+    if (profilePicture) updates.profilePicture = profilePicture;
+
     const user = await User.findByIdAndUpdate(req.user.id, updates, { new: true }).select('-password');
 
     if (!user) {
@@ -130,13 +138,13 @@ exports.deleteAccount = async (req, res) => {
     console.log("Deleting account for user ID:", req.user.id);
 
     const user = await User.findByIdAndDelete(req.user.id);
-    
+
     if (!user) {
       console.log("User account not found for deletion");
       return res.status(404).json({ message: "User not found" });
     }
 
-console.log("Account deleted successfully for user:", user.email);
+    console.log("Account deleted successfully for user:", user.email);
     res.status(200).json({ message: "Account deleted successfully!" });
   } catch (error) {
     console.error("Account Deletion Error:", error.message);

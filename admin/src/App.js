@@ -20,7 +20,6 @@ import UserEdit from './components/users/UserEdit';
 import ProfileSettings from './components/profile/ProfileSettings';
 import AdminPartners from './components/partners/AdminPartners';
 import AdminPortfolio from './components/portfolio/AdminPortfolio'; // Ensure the path is correct
-import AdminClients from './components/clients/AdminClients';
 import InquiryList from './components/inquiries/InquiryList';
 import AnnouncementManager from './components/announcements/AnnouncementManager';
 import PageList from './components/pages/PageList';
@@ -121,16 +120,6 @@ function App() {
               <PrivateRoute roles={['Admin', 'admin', 'superadmin']}>
                 <Layout>
                   <AdminPortfolio />
-                </Layout>
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/admin/clients"
-            element={
-              <PrivateRoute roles={['Admin', 'admin', 'superadmin']}>
-                <Layout>
-                  <AdminClients />
                 </Layout>
               </PrivateRoute>
             }

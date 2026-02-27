@@ -9,7 +9,7 @@ exports.getAnnouncement = async (req, res) => {
         if (!announcement) {
             // Create a default one if none exists
             announcement = await Announcement.create({
-                text: "NEW Casting.io System Live on",
+                text: "Casting.io System Live on Ecosystem7",
                 link: "#",
                 isActive: true
             });

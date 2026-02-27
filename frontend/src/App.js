@@ -4,7 +4,6 @@ import ImageComponent from './components/ImageComponent';
 import NovaLabsIntro from './components/NovaLabsIntro';
 import WhyChooseUs from './components/WhyChooseUs';
 import Navbar from './components/navbar/Navbar';
-import AnnouncementBar from './components/AnnouncementBar';
 
 // Lazy load heavy components for better performance
 const Portfolio = lazy(() => import('./components/Portfolio'));
@@ -21,7 +20,7 @@ const FooterLinks = lazy(() => import('./components/FooterLinks'));
 const Services = lazy(() => import('./pages/Services'));
 const AboutUs = lazy(() => import('./pages/AboutUs'));
 const Works = lazy(() => import('./pages/Works'));
-const Profile = lazy(() => import('./pages/Profile'));
+// const Profile = lazy(() => import('./pages/Profile'));
 
 // Loading fallback component
 const LoadingFallback = () => (
@@ -34,7 +33,6 @@ const App = () => {
   return (
     <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       {/* Components displayed everywhere */}
-      <AnnouncementBar />
       <Navbar />
 
       {/* Main content */}
@@ -47,7 +45,7 @@ const App = () => {
               <div>
                 {/* Load immediately - Critical content */}
                 <ImageComponent />
-                <div className="relative mt-0 md:mt-8">
+                <div className="relative mt-0">
                   <NovaLabsIntro />
                   <WhyChooseUs />
 
@@ -64,6 +62,7 @@ const App = () => {
                   <Suspense fallback={<LoadingFallback />}>
                     <OurClient />
                   </Suspense>
+
 
                   <Suspense fallback={<LoadingFallback />}>
                     <HackatonShow />
@@ -88,9 +87,7 @@ const App = () => {
                     <WorldMap />
                   </Suspense>
 
-                  <Suspense fallback={<LoadingFallback />}>
-                    <FooterLinks />
-                  </Suspense>
+
                 </div>
               </div>
             }
@@ -106,6 +103,9 @@ const App = () => {
           <Route path="/about-us" element={<Suspense fallback={<LoadingFallback />}><AboutUs /></Suspense>} />
           <Route path="/works" element={<Suspense fallback={<LoadingFallback />}><Works /></Suspense>} />
         </Routes>
+        <Suspense fallback={<LoadingFallback />}>
+          <FooterLinks />
+        </Suspense>
       </div>
     </Router>
   );

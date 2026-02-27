@@ -11,7 +11,6 @@
     "cra-template": "1.2.0",
     "cross-env": "^7.0.3",
     "framer-motion": "^12.33.0",
-    "multer": "^1.4.4",
     "quill": "^2.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -21,7 +20,8 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "cross-env HOST=0.0.0.0 react-scripts start",
+    "start": "cross-env HOST=0.0.0.0 GENERATE_SOURCEMAP=false react-scripts start",
+    "dev": "cross-env GENERATE_SOURCEMAP=false react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -49,5 +49,9 @@
     "autoprefixer": "^10.4.20",
     "postcss": "^8.5.1",
     "tailwindcss": "^3.4.17"
+  },
+  "overrides": {
+    "nth-check": "^2.0.1",
+    "webpack-dev-server": "^4.15.0"
   }
 }

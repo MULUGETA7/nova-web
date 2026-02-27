@@ -1,24 +1,16 @@
 import React from "react";
 import HeroImage from "./HeroImage";
-import HeroSection from "./HeroSection";
+import NovaLabsHead from "./NovaLabsHead";
 
 const ImageComponent = () => {
   return (
     <div className="relative">
-      {/* First Screen - Hero Image and Video */}
-      <div className="w-full relative z-10">
+      {/* Section 1: Hero content centered over video */}
+      <div className="w-full h-screen relative z-10 flex items-center justify-center overflow-hidden">
         <HeroImage />
-      </div>
-
-      {/* Second Screen - Integrated Components */}
-      <div className="min-h-0 md:min-h-screen flex flex-col items-center justify-center relative ">
-        {/* Background Title */}
-
-        {/* Content Layer */}
-        <div className="relative z-10 w-full">
-          {/* Hero Section (which includes NovaLabsHead) */}
-          <div className="mb-10 md:mb-32">
-            <HeroSection /> {/* Replaced NovaLabsHead with HeroSection */}
+        <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+          <div className="pointer-events-auto">
+            <NovaLabsHead />
           </div>
         </div>
       </div>

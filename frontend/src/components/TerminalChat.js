@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getApiUrl } from '../utils/apiConfig';
 
@@ -6,10 +7,8 @@ const TerminalChat = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [step, setStep] = useState(0); // 0=idle, 1=email, 2=message, 3=sending, 4=done
     const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('');
     const [lines, setLines] = useState([]);
     const [currentInput, setCurrentInput] = useState('');
-    const [error, setError] = useState('');
     const [lastReplyTime, setLastReplyTime] = useState(null);
     const inputRef = useRef(null);
     const terminalRef = useRef(null);
@@ -19,7 +18,7 @@ const TerminalChat = () => {
         setLines(prev => [...prev, { text, type, id: Date.now() + Math.random() }]);
     };
 
-    const fetchReplies = async (userEmail) => {
+    const fetchReplies = useCallback(async (userEmail) => {
         try {
             const apiUrl = getApiUrl();
             const response = await fetch(`${apiUrl}/api/messages/replies/${userEmail}`);
@@ -44,7 +43,7 @@ const TerminalChat = () => {
         } catch (err) {
             console.error('Polling error:', err);
         }
-    };
+    }, [lastReplyTime]);
 
     useEffect(() => {
         if (isOpen && email && step >= 2) {
@@ -57,7 +56,7 @@ const TerminalChat = () => {
         return () => {
             if (pollingRef.current) clearInterval(pollingRef.current);
         };
-    }, [isOpen, email, step]);
+    }, [isOpen, email, step, fetchReplies]);
 
     useEffect(() => {
         if (terminalRef.current) {
@@ -85,9 +84,7 @@ const TerminalChat = () => {
             { text: 'Please enter your email address:', type: 'prompt', id: 8 },
         ]);
         setEmail('');
-        setMessage('');
         setCurrentInput('');
-        setError('');
     };
 
     const handleClose = () => {
@@ -96,8 +93,6 @@ const TerminalChat = () => {
         setLines([]);
         setCurrentInput('');
         setEmail('');
-        setMessage('');
-        setError('');
     };
 
     const validateEmail = (e) => {
@@ -126,43 +121,39 @@ const TerminalChat = () => {
             setStep(2);
         } else if (step === 2) {
             // Message step
+            const userEmail = email; // Capture current email state
             addLine(`$ ${value}`, 'input');
-            setMessage(value);
             setCurrentInput('');
             setStep(3);
             addLine('', 'output');
-            addLine('> Transmitting message...', 'success');
+            addLine('> Establishing secure uplink...', 'success');
+            addLine('> Transmitting intelligence data...', 'success');
 
             try {
                 const apiUrl = getApiUrl();
-                const response = await fetch(`${apiUrl}/api/messages`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        name: email.split('@')[0],
-                        email: email,
-                        subject: 'Direct Message from Website',
-                        content: value,
-                        source: 'chat_widget',
-                    }),
+                const response = await axios.post(`${apiUrl}/api/messages`, {
+                    name: userEmail.split('@')[0],
+                    email: userEmail,
+                    subject: 'Direct Message from Website',
+                    content: value,
+                    source: 'chat_widget',
                 });
 
-                if (response.ok) {
+                if (response.status === 201 || response.status === 200) {
                     addLine('', 'output');
                     addLine('╔══════════════════════════════════════╗', 'system');
-                    addLine('║    ✓ Message sent successfully!        ║', 'system');
-                    addLine('║    We\'ll get back to you soon.         ║', 'system');
+                    addLine('║    ✓ Transmission successful!          ║', 'system');
+                    addLine('║    Admin will respond shortly.         ║', 'system');
                     addLine('╚══════════════════════════════════════╝', 'system');
                     addLine('', 'output');
-                    addLine('> Session complete. Type "new" to send another or close the terminal.', 'prompt');
+                    addLine('> Session locked. Type "new" to send another signal.', 'prompt');
                     setStep(4);
-                } else {
-                    throw new Error('Server returned an error');
                 }
             } catch (err) {
+                console.error('Terminal transmission error:', err);
                 addLine('', 'output');
-                addLine('✗ Failed to send message. Please try again later.', 'error');
-                addLine('> Type your message again:', 'prompt');
+                addLine('✗ Uplink failed: Server connection timeout.', 'error');
+                addLine('> Attempting to re-establish... Type your message again:', 'prompt');
                 setStep(2);
             }
         } else if (step === 4) {
@@ -170,7 +161,7 @@ const TerminalChat = () => {
             if (value.toLowerCase() === 'new') {
                 handleOpen();
             } else {
-                addLine('> Unknown command. Type "new" to send another message.', 'error');
+                addLine('> Signal rejected. Type "new" to re-open uplink.', 'error');
                 setCurrentInput('');
             }
         }

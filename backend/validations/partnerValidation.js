@@ -13,6 +13,9 @@ const partnerValidationSchema = Joi.object({
   subtitle: Joi.string().allow('', null),
   linkedinUrl: Joi.string().uri().allow('', null),
   instagramUrl: Joi.string().uri().allow('', null),
-});
+  buttonText: Joi.string().allow('', null),
+  buttonUrl: Joi.string().allow('', null),
+  bgColor: Joi.string().allow('', null),
+}).unknown();
 
 module.exports = partnerValidationSchema;

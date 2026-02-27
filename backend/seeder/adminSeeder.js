@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
 const User = require("../models/user"); // Import User model
 
@@ -53,34 +53,34 @@ exports.seedAdmin = async () => {
       adminEmail = "muleab7@gmail.com";
     }
 
-    // Delete existing admin if exists
-    const existingAdmin = await User.findOne({ email: adminEmail });
+    // List of admins to seed
+    const admins = [
+      {
+        name: "Mulugeta A",
+        email: "mulugeta@matrix.et",
+        password: adminPassword,
+        role: "superadmin"
+      },
+      {
+        name: "Nova Labs Admin",
+        email: adminEmail,
+        password: adminPassword,
+        role: "admin"
+      }
+    ];
 
-    if (existingAdmin) {
-      await User.deleteOne({ email: adminEmail });
-      console.log("🔄 Old admin deleted, creating new one...");
+    for (const adminData of admins) {
+      // Delete existing admin if exists
+      await User.deleteOne({ email: adminData.email });
+      console.log(`🔄 Old admin ${adminData.email} deleted, creating new one...`);
+
+      // Create the admin user
+      const admin = new User(adminData);
+      await admin.save();
+      console.log(`✅ Admin user ${adminData.email} created successfully!`);
     }
 
-    // Hash the password before saving
-    if (!adminPassword || typeof adminPassword !== 'string' || adminPassword.length === 0) {
-      console.log("⚠️  ADMIN_PASSWORD is invalid, skipping admin creation");
-      return;
-    }
-
-    const hashedPassword = await bcrypt.hash(adminPassword, 10);
-
-    // Create the admin user
-    const admin = new User({
-      name: "Nova Labs Admin",
-      email: adminEmail,
-      password: hashedPassword,
-      role: "admin",
-    });
-
-    await admin.save();
-    console.log("✅ Admin user created successfully!");
-    console.log("📧 Email:", adminEmail);
-    console.log("🔑 Password:", adminPassword);
+    // Admin creation success logged above individually
   } catch (error) {
     console.error("❌ Error seeding admin:", error.message);
     // Don't throw - allow server to continue even if seeding fails

@@ -8,15 +8,15 @@ const connectDB = async () => {
             return;
         }
 
-        console.log("Connecting to MongoDB at:", process.env.MONGO_URI); // Debug log
-        
+        console.log("⏳ Connecting to MongoDB...");
+
         // Set connection options with longer timeout
         const options = {
             serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
             socketTimeoutMS: 45000,
             family: 4 // Force IPv4
         };
-        
+
         await mongoose.connect(process.env.MONGO_URI, options);
         console.log('✅ MongoDB Connected Successfully');
     } catch (error) {

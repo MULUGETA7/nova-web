@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import {
   UsersIcon,
   MagnifyingGlassIcon,
-  FunnelIcon,
   UserPlusIcon,
   PencilIcon,
   TrashIcon,

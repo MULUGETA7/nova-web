@@ -3,7 +3,8 @@ import './AboutUs.css'; // Import the CSS file
 import HeroSection from '../components/about/hero/HeroSection';
 import StatsSection from '../components/about/stat/StatsSection';
 // import TeamSection from '../components/about/team/TeamSection'; // Hidden - can be enabled later
-import ClientLogosSection from '../components/about/works/ClientLogosSection';
+import OurClient from '../components/OurClient';
+import ConnectButton from '../components/about/works/ConnectButton';
 
 import AnimateOnScroll from '../components/animations/AnimateOnScroll';
 import FAQSection from '../components/works/faqs/FAQSection';
@@ -24,7 +25,10 @@ const AboutUs = () => {
       </AnimateOnScroll> */}
 
       <AnimateOnScroll animation="fadeIn">
-        <ClientLogosSection />
+        <OurClient />
+        <div className="flex justify-center pb-20">
+          <ConnectButton />
+        </div>
       </AnimateOnScroll>
 
       <AnimateOnScroll animation="slideUp">
@@ -35,9 +39,7 @@ const AboutUs = () => {
         <HonorsAndAwards />
       </AnimateOnScroll> */}
 
-      <AnimateOnScroll animation="fadeIn">
-        <FooterLinks />
-      </AnimateOnScroll>
+
     </>
   );
 };

@@ -6,8 +6,10 @@ const Message = require("../models/message");
 exports.createMessage = async (req, res) => {
     try {
         const { name, email, subject, content, source } = req.body;
+        console.log('Incoming message request:', { name, email, subject, content, source });
 
         if (!name || !email || !subject || !content) {
+            console.log('Validation failed: missing fields');
             return res.status(400).json({ message: "All fields are required" });
         }
 
@@ -20,6 +22,7 @@ exports.createMessage = async (req, res) => {
         });
 
         await newMessage.save();
+        console.log('Message created successfully:', newMessage._id);
 
         res.status(201).json({
             message: "Intelligence transmission successful. We will respond shortly.",

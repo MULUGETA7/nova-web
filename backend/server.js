@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 require("dotenv").config();
 
-const bcrypt = require('bcrypt'); // Replace bcryptjs with bcrypt
+const bcrypt = require('bcryptjs');
 
 const connectDB = require("./config/db");
 
@@ -12,7 +12,7 @@ const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const projectRoutes = require("./routes/projectRoutes");
-const assistantRoutes = require("./routes/assistantRoutes");
+
 const meetingRoutes = require("./routes/meetingRoutes");
 const blogRoutes = require("./routes/blogRoutes");
 const newsRoutes = require("./routes/newsRoutes");
@@ -75,7 +75,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/projects", projectRoutes);
-app.use("/api/assistant", assistantRoutes);
+
 app.use("/api/meetings", meetingRoutes);
 app.use("/api/blogs", blogRoutes);
 app.use("/api/news", newsRoutes);
@@ -96,7 +96,10 @@ app.get("/", (req, res) => {
 // ✅ Global Error Handler
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).json({ message: "Internal Server Error", error: err.message });
+    const message = process.env.NODE_ENV === 'production'
+        ? "Internal Server Error"
+        : err.message;
+    res.status(500).json({ message, error: process.env.NODE_ENV === 'production' ? null : err.message });
 });
 
 // ✅ Ensure the Server Listens on All Network Interfaces

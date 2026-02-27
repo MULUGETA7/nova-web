@@ -1,5 +1,5 @@
 const User = require("../models/user");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 // ✅ Get All Users (Admin only)
 const getAllUsers = async (req, res) => {
@@ -99,12 +99,6 @@ const createUser = async (req, res) => {
       password, // Password hashing is handled by the model's pre-save hook? Wait, let me check user model.
       role
     });
-
-    // Let me check if hashing is in the model. If not I should hash here.
-    // Looking at user.js again... it doesn't have a pre-save hook!
-    // I should hash the password before saving.
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(password, salt);
 
     await user.save();
 

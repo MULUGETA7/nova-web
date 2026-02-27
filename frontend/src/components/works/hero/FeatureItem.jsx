@@ -27,16 +27,6 @@ const FeatureItem = ({ icon, text }) => {
       </motion.div>
       <motion.p
         className="text-base font-bold text-white tracking-tight"
-        animate={{
-          opacity: [1, 0.3, 1],
-          x: [0, 1, 0]
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          repeatType: "reverse",
-          ease: "easeInOut"
-        }}
       >
         {text}
       </motion.p>

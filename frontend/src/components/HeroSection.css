@@ -1,12 +1,11 @@
 .hero-section {
   position: relative;
-  /* Allow absolute positioning of children */
-  top: -10;
+  width: 100%;
 }
 
 /* Frame (Text) Styling */
 .frame {
-  position: absolute;
+  position: relative;
   z-index: 2;
   /* Ensure text stays above */
   color: rgba(255, 255, 255, 0.2);
@@ -17,22 +16,13 @@
   text-align: center;
   white-space: nowrap;
   /* Prevent text wrapping */
-  left: 50%;
-  /* Center horizontally */
-  transform: translateX(-50%);
-  /* Perfect centering horizontally */
-  top: -185%;
-  /* Adjust this value to move the frame higher */
   width: 100%;
-  height: 50vh;
 }
 
 @media (max-width: 768px) {
   .frame {
     font-size: 4rem;
     /* Reduce font size for tablets */
-    top: -100%;
-    /* Adjust position */
   }
 }
 
@@ -40,8 +30,6 @@
   .frame {
     font-size: 2.5rem;
     /* Further reduce font size for mobile */
-    top: -50%;
-    /* Adjust position */
   }
 }
 
@@ -109,16 +97,11 @@
 }
 
 .nova-labs-head {
-  position: absolute;
-  /* Ensure it is absolutely positioned */
-  top: -850px;
-  /* Further adjusted to move it higher */
-  left: 50%;
-  /* Center horizontally */
-  transform: translateX(-50%);
-  /* Perfect centering */
+  position: relative;
+  /* Remove the large negative top to center the content */
+  top: 0;
   z-index: 10;
-  /* Ensure it stays above other elements */
+  width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -180,7 +163,7 @@ body {
 
 @media (max-width: 768px) {
   .hero-section {
-    margin-top: -350px;
+    margin-top: 0;
     /* Adjust this value to move the HeroSection up */
     /* Alternatively, you can use padding if needed */
   }

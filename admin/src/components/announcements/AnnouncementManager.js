@@ -101,7 +101,7 @@ const AnnouncementManager = () => {
                                         type="text"
                                         required
                                         className="w-full bg-white/5 border border-white/10 rounded-2xl py-5 pl-16 pr-8 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500/40 transition-all font-bold placeholder:text-gray-700"
-                                        placeholder="Enter announcement text (e.g. Casting.io System Live on)"
+                                        placeholder="Enter announcement text (e.g. Casting.io System Live on Ecosystem)"
                                         value={formData.text}
                                         onChange={(e) => setFormData({ ...formData, text: e.target.value })}
                                     />

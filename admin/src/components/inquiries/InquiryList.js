@@ -5,7 +5,6 @@ import {
     EnvelopeIcon,
     EnvelopeOpenIcon,
     TrashIcon,
-    ChevronRightIcon,
     MagnifyingGlassIcon,
     ClockIcon,
     FaceFrownIcon,
@@ -13,7 +12,8 @@ import {
     ChatBubbleLeftRightIcon,
     CommandLineIcon,
     PaperAirplaneIcon,
-    CheckCircleIcon
+    CheckCircleIcon,
+    ArrowPathIcon
 } from '@heroicons/react/24/outline';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
@@ -155,6 +155,15 @@ const InquiryList = () => {
                 </div>
 
                 <div className="flex items-center gap-3">
+                    <button
+                        onClick={fetchMessages}
+                        className={`p-3 bg-white/5 border border-white/10 rounded-2xl hover:text-cyan-400 hover:bg-white/10 transition-all group ${loading ? 'opacity-50' : ''}`}
+                        disabled={loading}
+                        title="Refresh Signals"
+                    >
+                        <ArrowPathIcon className={`w-5 h-5 ${loading ? 'animate-spin' : 'group-hover:rotate-180 transition-transform duration-500'}`} />
+                    </button>
+
                     <div className="relative group">
                         <MagnifyingGlassIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-focus-within:text-cyan-400 transition-colors" />
                         <input

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import './HackatonShow.css';
-import GradientText from './GradientText';
+// import GradientText from './GradientText';
 import ShinyText from './ShinyText';
 import DevTerminal from './DevTerminal';
 import { getApiUrl } from '../utils/apiConfig';

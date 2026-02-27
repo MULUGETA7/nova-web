@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
 import { WorldMapCard } from './WorldMapCard';
@@ -6,9 +7,27 @@ import LeftNovaLabsIntro from '../assets/images/leftnovalabsintro.png';
 import RightNovaLabsIntro from '../assets/images/rightnvalabsintro.png';
 import './NovaLabsIntro.css';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const NovaLabsIntro = () => {
+  const [announcement, setAnnouncement] = useState(null);
+
+  useEffect(() => {
+    const fetchAnnouncement = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/api/announcements`);
+        if (response.data && response.data.isActive) {
+          setAnnouncement(response.data);
+        }
+      } catch (err) {
+        console.error("Error fetching announcement for intro:", err);
+      }
+    };
+    fetchAnnouncement();
+  }, []);
+
   return (
-    <div className="intro-container px-4 md:px-6 py-20 lg:py-32">
+    <div className="intro-container px-4 md:px-6 pt-0 pb-20 lg:pt-0 lg:pb-32">
       {/* Background Ambience */}
       <div className="intro-glow-center"></div>
 
@@ -22,19 +41,23 @@ const NovaLabsIntro = () => {
         style={{ backgroundImage: `url(${RightNovaLabsIntro})`, backgroundPosition: 'right center', backgroundSize: 'contain' }}
       ></div>
 
-      <div className="max-w-7xl mx-auto relative z-10 text-center">
+      <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto relative z-10 text-center">
 
-        {/* New Product Tag */}
-        <div className="flex justify-center mb-10">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="tag-badge"
-          >
-            <div className="tag-pill">NEW</div>
-            <div className="tag-text">Casting.io System Live on Ecosystem</div>
-          </motion.div>
-        </div>
+        {/* Dynamic Product Tag */}
+        {announcement && (
+          <div className="flex justify-center mb-10">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="tag-badge"
+            >
+              <div className="tag-pill uppercase">New</div>
+              <div className="tag-text uppercase tracking-widest leading-none py-1">
+                {announcement.text}
+              </div>
+            </motion.div>
+          </div>
+        )}
 
 
         {/* Hero Title & Subtitle */}
@@ -75,12 +98,12 @@ const NovaLabsIntro = () => {
         </div>
 
         {/* Reverted Original Cards Grid */}
-        <div className="flex flex-col sm:grid sm:grid-cols-3 gap-6 p-2 sm:p-4 sm:ml-8 md:ml-16 lg:ml-36 items-center">
+        <div className="flex flex-col sm:grid sm:grid-cols-3 gap-6 p-2 sm:p-4 sm:ml-8 md:ml-16 lg:ml-36 items-end">
           {/* Left Column - Stacked Cards */}
           <div className="flex flex-col gap-4 sm:gap-6 w-full max-w-[426px] items-center sm:items-end">
             {/* Integration Card */}
-            <div className="relative w-full max-w-[347px]">
-              <div className="bg-[#1A1A1A] rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 w-full h-auto min-h-[80px] group transition-all duration-300 hover:bg-[#1A1A1A]/80">
+            <div className="relative w-full max-w-[347px] 2xl:max-w-[450px]">
+              <div className="bg-[#1A1A1A] rounded-xl sm:rounded-2xl md:rounded-3xl 2xl:p-8 p-3 sm:p-4 w-full h-auto min-h-[80px] group transition-all duration-300 hover:bg-[#1A1A1A]/80">
                 <h2 className="text-sm sm:text-base md:text-lg font-bold text-white text-left">
                   Seamless Integration
                 </h2>
@@ -92,8 +115,8 @@ const NovaLabsIntro = () => {
             </div>
 
             {/* Projects Card */}
-            <div className="relative w-full max-w-[426px]">
-              <div className="bg-[#1A1A1A] rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 w-full h-auto min-h-[110px] group transition-all duration-300 hover:bg-[#1A1A1A]/80">
+            <div className="relative w-full max-w-[426px] 2xl:max-w-[550px]">
+              <div className="bg-[#1A1A1A] rounded-xl sm:rounded-2xl md:rounded-3xl 2xl:p-8 p-3 sm:p-4 w-full h-auto min-h-[110px] group transition-all duration-300 hover:bg-[#1A1A1A]/80">
                 <h2 className="text-base sm:text-lg md:text-xl font-medium text-white mb-2 sm:mb-4 md:mb-6 pl-2 sm:pl-3 md:pl-4 text-left">
                   Completed Projects
                 </h2>
@@ -106,13 +129,11 @@ const NovaLabsIntro = () => {
           </div>
 
           {/* World Map Card - Middle */}
-          <div className="flex justify-center items-center px-2 sm:px-4 mt-6">
-            <div className="relative w-[426px] h-[230px] overflow-hidden rounded-[37px]">
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <WorldMapCard />
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 flex justify-center items-center pb-3">
-                <p className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center bg-clip-text text-transparent bg-gradient-to-r from-[#ff1cf7] to-[#00f0ff]">
+          <div className="flex justify-start items-center px-2 sm:px-4 mt-6 self-end">
+            <div className="relative w-[426px] h-[230px] 2xl:w-[550px] 2xl:h-[300px] overflow-hidden rounded-[37px] bg-[#1A1A1A]">
+              <WorldMapCard />
+              <div className="absolute bottom-8 left-0 right-0 flex justify-center items-center">
+                <p className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center bg-clip-text text-transparent bg-gradient-to-r from-[#ff1cf7] to-[#00f0ff] drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]">
                   12+ Countries
                 </p>
               </div>
@@ -120,8 +141,8 @@ const NovaLabsIntro = () => {
           </div>
 
           {/* Innovation and Solutions Card - Right */}
-          <div className="flex justify-center sm:justify-start items-start px-2 sm:px-4 w-full max-w-[300px]">
-            <div className="bg-[#1A1A1A] rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 w-full h-[220px] sm:h-[250px] md:h-[274px] group transition-all duration-300 hover:bg-[#1A1A1A]/80 relative overflow-hidden">
+          <div className="flex justify-center sm:justify-start items-start px-2 sm:px-4 w-full max-w-[300px] 2xl:max-w-[400px]">
+            <div className="bg-[#1A1A1A] rounded-xl sm:rounded-2xl md:rounded-3xl 2xl:p-8 p-3 sm:p-4 w-full h-[220px] sm:h-[250px] md:h-[274px] 2xl:h-[350px] group transition-all duration-300 hover:bg-[#1A1A1A]/80 relative overflow-hidden">
               {/* Gradient Background */}
               <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#ff1cf7]/20 via-[#1A1A1A] to-[#00f0ff]/20"></div>
 

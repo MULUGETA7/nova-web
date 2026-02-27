@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   HomeIcon,
   NewspaperIcon,
@@ -11,7 +11,6 @@ import {
   ArrowLeftOnRectangleIcon,
   BriefcaseIcon,
   GlobeAltIcon,
-  BuildingOfficeIcon,
   ChatBubbleLeftRightIcon,
   MegaphoneIcon,
   DocumentDuplicateIcon
@@ -26,9 +25,8 @@ const Sidebar = ({ onClose }) => {
     { name: 'Hackathon Images', href: '/hackathon-images', icon: PhotoIcon },
     { name: 'User Inquiries', href: '/inquiries', icon: ChatBubbleLeftRightIcon, adminOnly: true },
     { name: 'User Management', href: '/users', icon: UsersIcon, adminOnly: true },
-    { name: 'Innovation Showcase', href: '/admin/partners', icon: BriefcaseIcon, adminOnly: true },
-    { name: 'Admin Portfolio', href: '/admin/portfolio', icon: GlobeAltIcon, adminOnly: true },
-    { name: 'Admin Clients', href: '/admin/clients', icon: BuildingOfficeIcon, adminOnly: true },
+    { name: 'Innovation Vault', href: '/admin/partners', icon: BriefcaseIcon, adminOnly: true },
+    { name: 'Client Showcase', href: '/admin/portfolio', icon: GlobeAltIcon, adminOnly: true },
     { name: 'Page Management', href: '/admin/pages', icon: DocumentDuplicateIcon, adminOnly: true },
     { name: 'Live Announcements', href: '/announcements', icon: MegaphoneIcon, adminOnly: true },
     { name: 'Profile Settings', href: '/profile', icon: UserCircleIcon },

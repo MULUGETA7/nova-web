@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     ArrowLeftIcon,
-    GlobeAltIcon,
     PlusIcon,
     TrashIcon,
     CloudArrowUpIcon,
@@ -35,13 +34,7 @@ const PageEditor = () => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
-    useEffect(() => {
-        if (isEdit) {
-            fetchPage();
-        }
-    }, [id]);
-
-    const fetchPage = async () => {
+    const fetchPage = useCallback(async () => {
         try {
             const response = await axios.get(`${API_BASE_URL}/api/pages`); // We might need a single page GET route, but for now filtering
             const page = response.data.find(p => p._id === id);
@@ -60,7 +53,13 @@ const PageEditor = () => {
         } finally {
             setFetching(false);
         }
-    };
+    }, [id]);
+
+    useEffect(() => {
+        if (isEdit) {
+            fetchPage();
+        }
+    }, [isEdit, fetchPage]);
 
     const handleContentChange = (key, value) => {
         setFormData(prev => ({

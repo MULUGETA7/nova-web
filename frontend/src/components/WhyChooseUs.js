@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import './WhyChooseUs.css';
 import VectorImage from '../assets/Vector (1).png';
@@ -7,7 +7,26 @@ import ThirdWhyChoose from '../assets/card images/3rd_why_choose.png';
 import GradientText from './GradientText';
 import { Icon } from '@iconify/react';
 import TerminalChat from './TerminalChat';
+import { getApiUrl } from '../utils/apiConfig';
+
 const WhyChooseUs = () => {
+  const [partners, setPartners] = useState([]);
+
+  useEffect(() => {
+    const fetchPartners = async () => {
+      try {
+        const apiUrl = getApiUrl();
+        const response = await fetch(`${apiUrl}/api/clients`);
+        if (!response.ok) throw new Error('Failed to fetch');
+        const data = await response.json();
+        const partnerData = data.filter(item => item.type === 'partner');
+        setPartners(partnerData);
+      } catch (error) {
+        console.error("Error fetching collaborators:", error);
+      }
+    };
+    fetchPartners();
+  }, []);
   return (
     <section className="why-choose-us-section">
       {/* Dynamic Background */}
@@ -171,17 +190,27 @@ const WhyChooseUs = () => {
                 <div className="h-[1px] w-12 md:w-24 bg-gradient-to-l from-transparent to-white/20"></div>
               </div>
 
-              <div className="max-w-4xl px-4">
-                <p className="collaboration-quote">
-                  "Partnering with visionaries to redefine the boundaries of what's possible in the digital age."
-                </p>
-              </div>
-
-              <div className="flex items-center gap-8 mt-4 opacity-30 grayscale hover:grayscale-0 transition-all duration-700">
-                <Icon icon="simple-icons:ethereum" width="24" className="text-white" />
-                <Icon icon="simple-icons:googlecloud" width="24" className="text-white" />
-                <Icon icon="simple-icons:nvidia" width="32" className="text-white" />
-                <Icon icon="simple-icons:openai" width="24" className="text-white" />
+              <div className="flex flex-wrap items-center justify-center gap-8 mt-4">
+                {partners.length > 0 ? (
+                  partners.map((partner, index) => (
+                    <motion.img
+                      key={partner._id || index}
+                      src={`${getApiUrl()}${partner.logo}`}
+                      alt={partner.name}
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 0.3 }}
+                      whileHover={{ opacity: 1, scale: 1.1 }}
+                      className="h-8 md:h-12 w-auto object-contain grayscale invert transition-all duration-500 cursor-pointer"
+                    />
+                  ))
+                ) : (
+                  <>
+                    <Icon icon="simple-icons:ethereum" width="24" className="text-white opacity-30" />
+                    <Icon icon="simple-icons:googlecloud" width="24" className="text-white opacity-30" />
+                    <Icon icon="simple-icons:nvidia" width="32" className="text-white opacity-30" />
+                    <Icon icon="simple-icons:openai" width="24" className="text-white opacity-30" />
+                  </>
+                )}
               </div>
             </div>
           </div>

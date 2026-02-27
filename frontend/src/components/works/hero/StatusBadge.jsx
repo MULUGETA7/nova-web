@@ -13,7 +13,7 @@ const StatusBadge = () => {
           <div className="absolute top-0.5 left-0.5 bg-green-200 rounded-full h-[2px] w-[2px]" />
         </div>
       </div>
-      <div className="text-[10px] font-black text-white uppercase tracking-[0.3em]">Now Partnering on Q3 Web3 & AI Initiatives</div>
+      <div className="text-[10px] font-black text-white uppercase tracking-[0.3em]">NOW SYNCING ON Q1 2026 AI PROTOCOLS</div>
     </div>
   );
 };

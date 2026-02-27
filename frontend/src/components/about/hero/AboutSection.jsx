@@ -1,28 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { getApiUrl } from '../../../utils/apiConfig';
+import React from "react";
 
 const AboutSection = () => {
-  const [pageData, setPageData] = useState(null);
-
-  useEffect(() => {
-    const fetchPageData = async () => {
-      try {
-        const apiUrl = getApiUrl();
-        const response = await fetch(`${apiUrl}/api/pages/about-us`);
-        if (response.ok) {
-          const data = await response.json();
-          setPageData(data);
-        }
-      } catch (error) {
-        console.error("Error fetching about-us page data:", error);
-      }
-    };
-    fetchPageData();
-  }, []);
-
-  const sectionImage = pageData?.sectionImages?.find(img => img.label === 'AboutSection')?.url;
-  const imageUrl = sectionImage ? `${getApiUrl()}${sectionImage}` : "https://cdn.builder.io/api/v1/image/assets/c95d7ed1b46245fe99ca63e5b9b593ad/e539be07ad63cfb4147c53428f893fcbca42ca30?placeholderIfAbsent=true";
-
   return (
     <section className="flex overflow-hidden flex-col justify-center items-center w-full max-md:px-5 max-md:max-w-full">
       <div className="flex-1 px-9 py-24 w-full max-md:px-5 max-md:max-w-full">
@@ -45,14 +23,6 @@ const AboutSection = () => {
             </p>
           </article>
         </section>
-
-        <figure className="mt-9 px-20 w-full">
-          <img
-            src={imageUrl}
-            alt="Nova Labs showcase"
-            className="object-contain w-full rounded-2xl aspect-[2.19] max-md:max-w-full shadow-2xl"
-          />
-        </figure>
       </div>
     </section>
   );

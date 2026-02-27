@@ -54,7 +54,7 @@ const Frame = () => {
                 </div>
 
                 {/* Bottom Global Presence Stats */}
-                <div className="absolute bottom-[200px] left-0 w-full px-16 flex items-center gap-12 pointer-events-none opacity-40 hover:opacity-100 transition-opacity duration-700">
+                <div className="absolute bottom-[20px] left-0 w-full px-16 flex items-center gap-12 pointer-events-none opacity-40 hover:opacity-100 transition-opacity duration-700">
                     <div className="flex flex-col">
                         <span className="text-[10px] text-[#00f0ff] font-black uppercase tracking-[0.4em] mb-2">Global Reach</span>
                         <div className="flex items-baseline gap-2">
@@ -74,7 +74,7 @@ const Frame = () => {
                     <div className="flex-1 flex items-center justify-end">
                         <div className="flex items-center gap-3">
                             <div className="w-2 h-2 rounded-full bg-[#00f0ff] shadow-[0_0_10px_#00f0ff] animate-pulse"></div>
-                            <span className="text-[11px] text-gray-400 font-bold uppercase tracking-widest">Autonomous Neural Network: Online</span>
+
                         </div>
                     </div>
                 </div>

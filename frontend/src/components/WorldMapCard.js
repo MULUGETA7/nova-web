@@ -3,11 +3,11 @@ import React from 'react';
 export function WorldMapCard() {
   return (
     <>
-      <div className="relative overflow-hidden rounded-[37px] w-[426px] h-[230px]">
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
         <img
           src={require('../assets/images/World.png')}
           alt="Nova Labs World Map"
-          className="w-full h-full rounded-[37px] object-cover"
+          className="absolute inset-0 w-full h-full object-cover scale-[1.2] origin-center"
         />
 
         {/* Location Dots */}

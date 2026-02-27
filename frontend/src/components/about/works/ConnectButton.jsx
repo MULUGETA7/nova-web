@@ -1,13 +1,12 @@
-"use client";
-import React from "react";
+import { Icon } from '@iconify/react';
 
 function ConnectButton() {
   return (
     <button
-      className="relative  mx-auto mt-10 text-gray-200 text-base font-semibold leading-tight border border-[#E1EAE9] rounded-[44px] px-7 py-5  hover:bg-gray-800 transition-colors"
-    
+      className="btn-primary-nova mx-auto mt-10 hover:scale-105 transition-transform"
     >
-      Start Now
+      Start Your Project Now
+      <Icon icon="solar:rocket-bold-duotone" width="24" />
     </button>
   );
 }
